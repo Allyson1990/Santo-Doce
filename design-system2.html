@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Santo Doce — Design System</title>
+  <meta name="description" content="Design System da marca Santo Doce: tokens, componentes e diretrizes prontas para Tailwind CSS." />
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind Play CDN + config de tokens -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/js/tailwind.config.js"></script>
+
+  <!-- Ícones Lucide -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <!-- Tokens + Componentes -->
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+
+  <style>
+    html { scroll-behavior: smooth; }
+    /* Scrollspy */
+    .ds-nav a { display:flex; align-items:center; gap:10px; padding:8px 12px; border-radius:8px; font-size:14px; color:var(--sd-text-secondary); text-decoration:none; transition:all .25s var(--sd-ease); }
+    .ds-nav a:hover { background:var(--sd-surface); color:var(--sd-primary); }
+    .ds-nav a.is-active { background:var(--sd-primary-soft); color:var(--sd-primary-dark); font-weight:600; }
+    .ds-nav__group { font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:#A79C8E; padding:16px 12px 6px; font-weight:600; }
+    /* Reveal */
+    [data-reveal] { opacity:0; transform:translateY(16px); transition:opacity .4s var(--sd-ease), transform .4s var(--sd-ease); }
+    [data-reveal].is-revealed { opacity:1; transform:none; }
+    /* Section title */
+    .ds-eyebrow { font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--sd-secondary); font-weight:600; }
+    .ds-grid-demo > * { outline:1px dashed var(--sd-border-strong); }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============ TOP BAR ============ -->
+  <header class="sticky top-0 z-40 border-b border-line bg-background/90 backdrop-blur">
+    <div class="ds-container flex items-center justify-between" style="height:72px;">
+      <a href="#top" class="flex items-center gap-3">
+        <span class="sd-avatar sd-avatar--sm" style="background:var(--sd-primary);font-family:var(--sd-font-heading);font-size:18px;">S</span>
+        <span class="font-heading" style="font-size:24px;font-weight:700;color:var(--sd-primary-dark);">Santo Doce</span>
+        <span class="sd-badge sd-badge--gold" style="margin-left:4px;">Design System</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-1">
+        <a href="#foundations" class="sd-btn sd-btn--ghost sd-btn--sm">Fundamentos</a>
+        <a href="#components" class="sd-btn sd-btn--ghost sd-btn--sm">Componentes</a>
+        <a href="#practices" class="sd-btn sd-btn--ghost sd-btn--sm">Boas práticas</a>
+        <a href="index.html" class="sd-btn sd-btn--primary sd-btn--sm">Ver o site</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ HERO DA DOC ============ -->
+  <section id="top" class="ds-container" style="padding-top:80px;padding-bottom:56px;">
+    <p class="ds-eyebrow" data-reveal>Confeitaria saudável · Premium · Artesanal</p>
+    <h1 class="font-heading" style="font-size:clamp(40px,7vw,64px);font-weight:700;line-height:1.05;margin-top:16px;max-width:900px;" data-reveal>
+      O Design System do <span style="color:var(--sd-primary);">Santo Doce</span>
+    </h1>
+    <p style="font-size:20px;color:var(--sd-text-secondary);max-width:640px;margin-top:24px;" data-reveal>
+      Uma base visual elegante, aconchegante e altamente conversiva. Tokens, componentes e diretrizes prontas
+      para implementação em <strong style="color:var(--sd-text-primary)">Tailwind CSS</strong>.
+    </p>
+    <div class="flex flex-wrap gap-3" style="margin-top:32px;" data-reveal>
+      <a href="#components" class="sd-btn sd-btn--primary">Explorar componentes <i data-lucide="arrow-right" class="sd-icon"></i></a>
+      <a href="#foundations" class="sd-btn sd-btn--outline">Ver tokens</a>
+    </div>
+  </section>
+
+  <!-- ============ LAYOUT COM SIDEBAR ============ -->
+  <div class="ds-container" style="display:grid;grid-template-columns:1fr;gap:48px;padding-bottom:120px;">
+    <div style="display:grid;gap:48px;grid-template-columns:1fr;" class="lg:!grid-cols-[240px_1fr]">
+
+      <!-- SIDEBAR -->
+      <aside class="hidden lg:block">
+        <nav class="ds-nav sticky" style="top:96px;">
+          <div class="ds-nav__group">Fundamentos</div>
+          <a data-spy="colors" href="#colors"><i data-lucide="palette" style="width:16px;height:16px"></i>Cores</a>
+          <a data-spy="typography" href="#typography"><i data-lucide="type" style="width:16px;height:16px"></i>Tipografia</a>
+          <a data-spy="spacing" href="#spacing"><i data-lucide="ruler" style="width:16px;height:16px"></i>Espaçamento</a>
+          <a data-spy="radius" href="#radius"><i data-lucide="square" style="width:16px;height:16px"></i>Radius</a>
+          <a data-spy="shadows" href="#shadows"><i data-lucide="layers" style="width:16px;height:16px"></i>Sombras</a>
+          <a data-spy="motion" href="#motion"><i data-lucide="wind" style="width:16px;height:16px"></i>Movimento</a>
+          <a data-spy="grid" href="#grid"><i data-lucide="layout-grid" style="width:16px;height:16px"></i>Grid</a>
+          <div class="ds-nav__group">Componentes</div>
+          <a data-spy="buttons" href="#buttons"><i data-lucide="mouse-pointer-click" style="width:16px;height:16px"></i>Button</a>
+          <a data-spy="forms" href="#forms"><i data-lucide="text-cursor-input" style="width:16px;height:16px"></i>Inputs & Forms</a>
+          <a data-spy="selection" href="#selection"><i data-lucide="check-square" style="width:16px;height:16px"></i>Check / Radio / Switch</a>
+          <a data-spy="accordion" href="#accordion"><i data-lucide="chevrons-down-up" style="width:16px;height:16px"></i>Accordion & FAQ</a>
+          <a data-spy="navbar" href="#navbar"><i data-lucide="menu" style="width:16px;height:16px"></i>Navbar</a>
+          <a data-spy="hero" href="#hero"><i data-lucide="sparkles" style="width:16px;height:16px"></i>Hero</a>
+          <a data-spy="cards" href="#cards"><i data-lucide="square-stack" style="width:16px;height:16px"></i>Cards</a>
+          <a data-spy="testimonials" href="#testimonials"><i data-lucide="quote" style="width:16px;height:16px"></i>Testimonials</a>
+          <a data-spy="pricing" href="#pricing"><i data-lucide="tag" style="width:16px;height:16px"></i>Pricing</a>
+          <a data-spy="cta" href="#cta"><i data-lucide="megaphone" style="width:16px;height:16px"></i>CTA</a>
+          <a data-spy="badges" href="#badges"><i data-lucide="badge-check" style="width:16px;height:16px"></i>Badges & Tags</a>
+          <a data-spy="feedback" href="#feedback"><i data-lucide="bell" style="width:16px;height:16px"></i>Alert & Toast</a>
+          <a data-spy="overlays" href="#overlays"><i data-lucide="app-window" style="width:16px;height:16px"></i>Modal & Drawer</a>
+          <a data-spy="tabs" href="#tabs"><i data-lucide="folder" style="width:16px;height:16px"></i>Tabs</a>
+          <a data-spy="navigation" href="#navigation"><i data-lucide="chevrons-right" style="width:16px;height:16px"></i>Breadcrumb & Pagination</a>
+          <a data-spy="avatar" href="#avatar"><i data-lucide="user-circle" style="width:16px;height:16px"></i>Avatar & Dropdown</a>
+          <a data-spy="status" href="#status"><i data-lucide="loader" style="width:16px;height:16px"></i>Progress & Loading</a>
+          <a data-spy="footer" href="#footer"><i data-lucide="panel-bottom" style="width:16px;height:16px"></i>Footer</a>
+          <div class="ds-nav__group">Guia</div>
+          <a data-spy="practices" href="#practices"><i data-lucide="check-check" style="width:16px;height:16px"></i>Boas práticas</a>
+        </nav>
+      </aside>
+
+      <!-- CONTEÚDO -->
+      <main style="min-width:0;display:flex;flex-direction:column;gap:96px;">
+
+        <!-- ============================================================ FOUNDATIONS -->
+        <section id="foundations">
+          <p class="ds-eyebrow">Fundamentos</p>
+          <h2 class="font-heading" style="font-size:42px;font-weight:600;margin-top:8px;">Tokens da marca</h2>
+          <p style="color:var(--sd-text-secondary);max-width:640px;margin-top:12px;">
+            A fonte única de verdade. Todos os componentes derivam destes tokens, garantindo consistência em cada página do projeto.
+          </p>
+        </section>
+
+        <!-- CORES -->
+        <section id="colors" class="ds-scroll-mt">
+          <div class="flex items-end justify-between flex-wrap gap-2" style="margin-bottom:24px;">
+            <div><p class="ds-eyebrow">Color Tokens</p><h3 class="font-heading" style="font-size:34px;font-weight:600;">Paleta</h3></div>
+            <span class="sd-hint">Clique em um swatch para copiar o HEX</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px;">
+            <!-- swatches -->
+            <div data-copy="#0E5A43" role="button" tabindex="0"><div class="ds-swatch" style="background:#0E5A43;"></div><div style="margin-top:10px;font-weight:600;font-size:14px;">Primary</div><code class="sd-hint">#0E5A43</code></div>
+            <div data-copy="#0A4835" role="button" tabindex="0"><div class="ds-swatch" style="background:#0A4835;"></div><div style="margin-top:10px;font-weight:600;font-size:14px;">Primary Dark</div><code class="sd-hint">#0A4835</code></div>
+            <div data-copy="#C99A2E" role="button" tabindex="0"><div class="ds-swatch" style="background:#C99A2E;"></div><div style="margin-top:10px;font-weight:600;font-size:14px;">Secondary · Gold</div><code class="sd-hint">#C99A2E</code></div>
+            <div data-copy="#8E6847" role="button" tabindex="0"><div class="ds-swatch" style="background:#8E6847;"></div><div style="margin-top:10px;font-weight:600;font-size:14px;">Accent</div><code class="sd-hint">#8E6847</code></div>
+            <div data-copy="#F7F1EB" role="button" tabindex="0"><div class="ds-swatch" style="background:#F7F1EB;"></div><div style="margin-top:10px;font-weight:600;font-size:14px;">Background</div><code class="sd-hint">#F7F1EB</code></div>
+            <div data-copy="#EFE5DA" role="button" tabindex="0"><div class="ds-swatch" style="background:#EFE5DA;"></div><div style="margin-top:10px;font-weight:600;font-size:14px;">Surface</div><code class="sd-hint">#EFE5DA</code></div>
+            <div data-copy="#FFFFFF" role="button" tabindex="0"><div class="ds-swatch" style="background:#FFFFFF;"></div><div style="margin-top:10px;font-weight:600;font-size:14px;">White</div><code class="sd-hint">#FFFFFF</code></div>
+            <div data-copy="#2D2D2D" role="button" tabindex="0"><div class="ds-swatch" style="background:#2D2D2D;"></div><div style="margin-top:10px;font-weight:600;font-size:14px;">Text Primary</div><code class="sd-hint">#2D2D2D</code></div>
+            <div data-copy="#5C5C5C" role="button" tabindex="0"><div class="ds-swatch" style="background:#5C5C5C;"></div><div style="margin-top:10px;font-weight:600;font-size:14px;">Text Secondary</div><code class="sd-hint">#5C5C5C</code></div>
+            <div data-copy="#4E8F5B" role="button" tabindex="0"><div class="ds-swatch" style="background:#4E8F5B;"></div><div style="margin-top:10px;font-weight:600;font-size:14px;">Success</div><code class="sd-hint">#4E8F5B</code></div>
+            <div data-copy="#D64545" role="button" tabindex="0"><div class="ds-swatch" style="background:#D64545;"></div><div style="margin-top:10px;font-weight:600;font-size:14px;">Error</div><code class="sd-hint">#D64545</code></div>
+          </div>
+        </section>
+
+        <!-- TIPOGRAFIA -->
+        <section id="typography" class="ds-scroll-mt">
+          <p class="ds-eyebrow">Typography Tokens</p>
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:24px;">Tipografia</h3>
+          <div class="ds-specimen" style="display:grid;gap:8px;">
+            <div class="flex items-baseline justify-between gap-4 flex-wrap" style="border-bottom:1px solid var(--sd-border);padding-bottom:16px;"><span class="font-heading" style="font-size:64px;font-weight:700;">Santo Doce</span><code class="sd-hint">Display · 64px · Cormorant 700</code></div>
+            <div class="flex items-baseline justify-between gap-4 flex-wrap" style="border-bottom:1px solid var(--sd-border);padding:16px 0;"><span class="font-heading" style="font-size:56px;font-weight:700;">Doces sem culpa</span><code class="sd-hint">H1 · 56px · 700</code></div>
+            <div class="flex items-baseline justify-between gap-4 flex-wrap" style="border-bottom:1px solid var(--sd-border);padding:16px 0;"><span class="font-heading" style="font-size:42px;font-weight:600;">Receitas testadas</span><code class="sd-hint">H2 · 42px · 600</code></div>
+            <div class="flex items-baseline justify-between gap-4 flex-wrap" style="border-bottom:1px solid var(--sd-border);padding:16px 0;"><span class="font-heading" style="font-size:34px;font-weight:600;">Confeitaria artesanal</span><code class="sd-hint">H3 · 34px · 600</code></div>
+            <div class="flex items-baseline justify-between gap-4 flex-wrap" style="border-bottom:1px solid var(--sd-border);padding:16px 0;"><span class="font-heading" style="font-size:28px;font-weight:600;">Sabor de verdade</span><code class="sd-hint">H4 · 28px · 600</code></div>
+            <div class="flex items-baseline justify-between gap-4 flex-wrap" style="border-bottom:1px solid var(--sd-border);padding:16px 0;"><span class="font-heading" style="font-size:24px;font-weight:600;">Do zero, com apoio</span><code class="sd-hint">H5 · 24px · 600</code></div>
+            <div class="flex items-baseline justify-between gap-4 flex-wrap" style="border-bottom:1px solid var(--sd-border);padding:16px 0;"><span style="font-size:20px;">Body Large — Poppins 20px para introduções calorosas.</span><code class="sd-hint">Body LG · 20px</code></div>
+            <div class="flex items-baseline justify-between gap-4 flex-wrap" style="border-bottom:1px solid var(--sd-border);padding:16px 0;"><span style="font-size:18px;">Body — Poppins 18px, o texto padrão do produto.</span><code class="sd-hint">Body · 18px</code></div>
+            <div class="flex items-baseline justify-between gap-4 flex-wrap" style="border-bottom:1px solid var(--sd-border);padding:16px 0;"><span style="font-size:16px;">Body Small — 16px para apoios e legendas.</span><code class="sd-hint">Body SM · 16px</code></div>
+            <div class="flex items-baseline justify-between gap-4 flex-wrap" style="padding-top:16px;"><span style="font-size:14px;color:var(--sd-text-secondary);">CAPTION — 14px para metadados</span><code class="sd-hint">Caption · 14px</code></div>
+          </div>
+        </section>
+
+        <!-- ESPAÇAMENTO -->
+        <section id="spacing" class="ds-scroll-mt">
+          <p class="ds-eyebrow">Spacing Tokens</p>
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:8px;">Espaçamento</h3>
+          <p style="color:var(--sd-text-secondary);margin-bottom:24px;">Escala de 8 pontos. Use múltiplos para ritmo e respiro consistentes.</p>
+          <div class="ds-specimen" style="display:flex;flex-direction:column;gap:14px;">
+            <!-- rows generated -->
+            <div class="flex items-center gap-4"><span class="sd-hint" style="width:56px;">4px</span><span style="height:16px;width:4px;background:var(--sd-secondary);border-radius:2px;"></span></div>
+            <div class="flex items-center gap-4"><span class="sd-hint" style="width:56px;">8px</span><span style="height:16px;width:8px;background:var(--sd-secondary);border-radius:2px;"></span></div>
+            <div class="flex items-center gap-4"><span class="sd-hint" style="width:56px;">16px</span><span style="height:16px;width:16px;background:var(--sd-secondary);border-radius:2px;"></span></div>
+            <div class="flex items-center gap-4"><span class="sd-hint" style="width:56px;">24px</span><span style="height:16px;width:24px;background:var(--sd-secondary);border-radius:2px;"></span></div>
+            <div class="flex items-center gap-4"><span class="sd-hint" style="width:56px;">32px</span><span style="height:16px;width:32px;background:var(--sd-secondary);border-radius:2px;"></span></div>
+            <div class="flex items-center gap-4"><span class="sd-hint" style="width:56px;">40px</span><span style="height:16px;width:40px;background:var(--sd-secondary);border-radius:2px;"></span></div>
+            <div class="flex items-center gap-4"><span class="sd-hint" style="width:56px;">48px</span><span style="height:16px;width:48px;background:var(--sd-secondary);border-radius:2px;"></span></div>
+            <div class="flex items-center gap-4"><span class="sd-hint" style="width:56px;">56px</span><span style="height:16px;width:56px;background:var(--sd-secondary);border-radius:2px;"></span></div>
+            <div class="flex items-center gap-4"><span class="sd-hint" style="width:56px;">64px</span><span style="height:16px;width:64px;background:var(--sd-secondary);border-radius:2px;"></span></div>
+            <div class="flex items-center gap-4"><span class="sd-hint" style="width:56px;">80px</span><span style="height:16px;width:80px;background:var(--sd-secondary);border-radius:2px;"></span></div>
+            <div class="flex items-center gap-4"><span class="sd-hint" style="width:56px;">96px</span><span style="height:16px;width:96px;background:var(--sd-secondary);border-radius:2px;"></span></div>
+            <div class="flex items-center gap-4"><span class="sd-hint" style="width:56px;">120px</span><span style="height:16px;width:120px;background:var(--sd-secondary);border-radius:2px;"></span></div>
+          </div>
+        </section>
+
+        <!-- RADIUS -->
+        <section id="radius" class="ds-scroll-mt">
+          <p class="ds-eyebrow">Radius Tokens</p>
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:24px;">Border Radius</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:16px;">
+            <div class="text-center"><div style="background:var(--sd-primary);height:96px;border-radius:4px;"></div><div style="margin-top:10px;font-weight:600;font-size:14px;">xs</div><code class="sd-hint">4px</code></div>
+            <div class="text-center"><div style="background:var(--sd-primary);height:96px;border-radius:8px;"></div><div style="margin-top:10px;font-weight:600;font-size:14px;">sm</div><code class="sd-hint">8px</code></div>
+            <div class="text-center"><div style="background:var(--sd-primary);height:96px;border-radius:12px;"></div><div style="margin-top:10px;font-weight:600;font-size:14px;">md</div><code class="sd-hint">12px</code></div>
+            <div class="text-center"><div style="background:var(--sd-primary);height:96px;border-radius:20px;"></div><div style="margin-top:10px;font-weight:600;font-size:14px;">lg</div><code class="sd-hint">20px</code></div>
+            <div class="text-center"><div style="background:var(--sd-primary);height:96px;border-radius:32px;"></div><div style="margin-top:10px;font-weight:600;font-size:14px;">xl</div><code class="sd-hint">32px</code></div>
+            <div class="text-center"><div style="background:var(--sd-primary);height:96px;border-radius:999px;"></div><div style="margin-top:10px;font-weight:600;font-size:14px;">full</div><code class="sd-hint">999px</code></div>
+          </div>
+        </section>
+
+        <!-- SOMBRAS -->
+        <section id="shadows" class="ds-scroll-mt">
+          <p class="ds-eyebrow">Shadow Tokens</p>
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:8px;">Sombras</h3>
+          <p style="color:var(--sd-text-secondary);margin-bottom:24px;">Sempre muito suaves — servem apenas para destacar cards, nunca para dramatizar.</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:24px;">
+            <div style="background:#fff;height:120px;border-radius:20px;box-shadow:var(--sd-shadow-xs);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--sd-text-secondary)">shadow-xs</div>
+            <div style="background:#fff;height:120px;border-radius:20px;box-shadow:var(--sd-shadow-sm);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--sd-text-secondary)">shadow-sm</div>
+            <div style="background:#fff;height:120px;border-radius:20px;box-shadow:var(--sd-shadow-md);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--sd-text-secondary)">shadow-md</div>
+            <div style="background:#fff;height:120px;border-radius:20px;box-shadow:var(--sd-shadow-lg);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--sd-text-secondary)">shadow-lg</div>
+          </div>
+        </section>
+
+        <!-- MOTION -->
+        <section id="motion" class="ds-scroll-mt">
+          <p class="ds-eyebrow">Motion Tokens</p>
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:8px;">Movimento</h3>
+          <p style="color:var(--sd-text-secondary);margin-bottom:24px;">Animações discretas — fade, slide e scale — entre 200ms e 300ms com easing suave <code class="ds-code">cubic-bezier(.22,.61,.36,1)</code>.</p>
+          <div class="ds-specimen flex flex-wrap gap-4">
+            <div class="sd-card" style="padding:20px;text-align:center;animation:fade-in 1s var(--sd-ease) infinite alternate;">Fade · 250ms</div>
+            <div class="sd-card" style="padding:20px;text-align:center;animation:fade-up 1.2s var(--sd-ease) infinite alternate;">Slide · 300ms</div>
+            <div class="sd-card" style="padding:20px;text-align:center;animation:scale-in 1s var(--sd-ease) infinite alternate;">Scale · 200ms</div>
+          </div>
+        </section>
+
+        <!-- GRID -->
+        <section id="grid" class="ds-scroll-mt">
+          <p class="ds-eyebrow">Layout</p>
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:8px;">Grid & Container</h3>
+          <p style="color:var(--sd-text-secondary);margin-bottom:24px;">Desktop 12 colunas · Container 1280px · Tablet 768px · Mobile 390px.</p>
+          <div class="ds-specimen">
+            <div class="ds-grid-demo" style="display:grid;grid-template-columns:repeat(12,1fr);gap:16px;">
+              <div style="height:56px;background:var(--sd-primary-soft);border-radius:8px;"></div>
+              <div style="height:56px;background:var(--sd-primary-soft);border-radius:8px;"></div>
+              <div style="height:56px;background:var(--sd-primary-soft);border-radius:8px;"></div>
+              <div style="height:56px;background:var(--sd-primary-soft);border-radius:8px;"></div>
+              <div style="height:56px;background:var(--sd-primary-soft);border-radius:8px;"></div>
+              <div style="height:56px;background:var(--sd-primary-soft);border-radius:8px;"></div>
+              <div style="height:56px;background:var(--sd-primary-soft);border-radius:8px;"></div>
+              <div style="height:56px;background:var(--sd-primary-soft);border-radius:8px;"></div>
+              <div style="height:56px;background:var(--sd-primary-soft);border-radius:8px;"></div>
+              <div style="height:56px;background:var(--sd-primary-soft);border-radius:8px;"></div>
+              <div style="height:56px;background:var(--sd-primary-soft);border-radius:8px;"></div>
+              <div style="height:56px;background:var(--sd-primary-soft);border-radius:8px;"></div>
+            </div>
+            <div class="flex flex-wrap gap-2" style="margin-top:16px;">
+              <span class="sd-badge sd-badge--green">Desktop · 12 col · 1280px</span>
+              <span class="sd-badge sd-badge--outline">Tablet · 768px</span>
+              <span class="sd-badge sd-badge--outline">Mobile · 390px</span>
+              <span class="sd-badge sd-badge--outline">Gutter · 16–24px</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ COMPONENTS -->
+        <section id="components">
+          <p class="ds-eyebrow">Biblioteca</p>
+          <h2 class="font-heading" style="font-size:42px;font-weight:600;margin-top:8px;">Componentes</h2>
+          <p style="color:var(--sd-text-secondary);max-width:640px;margin-top:12px;">
+            Cada componente inclui estados (hover, active, disabled, focus), exemplos de uso e classe utilitária pronta.
+          </p>
+        </section>
+
+        <!-- BUTTONS -->
+        <section id="buttons" class="ds-scroll-mt">
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:8px;">Button</h3>
+          <p style="color:var(--sd-text-secondary);margin-bottom:24px;">Altura 56px · radius full · área de clique ≥ 44px. Classe base <code class="ds-code">.sd-btn</code>.</p>
+          <div class="ds-specimen" style="display:flex;flex-direction:column;gap:28px;">
+            <div>
+              <div class="sd-hint" style="margin-bottom:12px;">Variantes</div>
+              <div class="flex flex-wrap items-center gap-3">
+                <button class="sd-btn sd-btn--primary">Quero entrar no Santo Doce</button>
+                <button class="sd-btn sd-btn--secondary">Secondary</button>
+                <button class="sd-btn sd-btn--outline">Outline</button>
+                <button class="sd-btn sd-btn--ghost">Ghost</button>
+                <button class="sd-btn sd-btn--primary sd-btn--icon" aria-label="Favoritar"><i data-lucide="heart" class="sd-icon"></i></button>
+              </div>
+            </div>
+            <div>
+              <div class="sd-hint" style="margin-bottom:12px;">Estados</div>
+              <div class="flex flex-wrap items-center gap-3">
+                <button class="sd-btn sd-btn--primary">Normal</button>
+                <button class="sd-btn sd-btn--primary" style="background:var(--sd-secondary-dark);box-shadow:var(--sd-shadow-md)">Hover</button>
+                <button class="sd-btn sd-btn--primary" style="transform:translateY(1px)">Active</button>
+                <button class="sd-btn sd-btn--primary" style="box-shadow:var(--sd-shadow-focus)">Focus</button>
+                <button class="sd-btn sd-btn--primary" disabled>Disabled</button>
+              </div>
+            </div>
+            <div>
+              <div class="sd-hint" style="margin-bottom:12px;">Tamanhos & largura total</div>
+              <div class="flex flex-wrap items-center gap-3">
+                <button class="sd-btn sd-btn--secondary sd-btn--sm">Small</button>
+                <button class="sd-btn sd-btn--secondary">Default</button>
+                <button class="sd-btn sd-btn--secondary sd-btn--lg">Large</button>
+              </div>
+              <button class="sd-btn sd-btn--primary sd-btn--block" style="margin-top:16px;">Bloco 100% — CTA principal <i data-lucide="arrow-right" class="sd-icon"></i></button>
+            </div>
+          </div>
+        </section>
+
+        <!-- FORMS -->
+        <section id="forms" class="ds-scroll-mt">
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:8px;">Inputs & Textarea</h3>
+          <p style="color:var(--sd-text-secondary);margin-bottom:24px;">Fundo branco · borda cinza clara · radius 12px · foco verde.</p>
+          <div class="ds-specimen" style="display:grid;gap:24px;grid-template-columns:1fr;max-width:560px;">
+            <div class="sd-field">
+              <label class="sd-label" for="in-name">Nome</label>
+              <input id="in-name" class="sd-input" type="text" placeholder="Seu nome" />
+            </div>
+            <div class="sd-field">
+              <label class="sd-label" for="in-email">E-mail (foco)</label>
+              <input id="in-email" class="sd-input" type="email" placeholder="voce@email.com" style="border-color:var(--sd-primary);box-shadow:var(--sd-shadow-focus)" />
+              <span class="sd-hint">Usaremos apenas para o acesso ao curso.</span>
+            </div>
+            <div class="sd-field">
+              <label class="sd-label" for="in-err">Com erro</label>
+              <input id="in-err" class="sd-input sd-input--error" type="text" value="email-invalido" />
+              <span class="sd-hint sd-hint--error">Digite um e-mail válido.</span>
+            </div>
+            <div class="sd-field">
+              <label class="sd-label" for="in-dis">Desabilitado</label>
+              <input id="in-dis" class="sd-input" type="text" value="Campo bloqueado" disabled />
+            </div>
+            <div class="sd-field">
+              <label class="sd-label" for="ta">Mensagem</label>
+              <textarea id="ta" class="sd-textarea" placeholder="Conte sua experiência com confeitaria..."></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- SELECTION CONTROLS -->
+        <section id="selection" class="ds-scroll-mt">
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:24px;">Checkbox · Radio · Switch</h3>
+          <div class="ds-specimen" style="display:grid;gap:32px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
+            <div>
+              <div class="sd-hint" style="margin-bottom:12px;">Checkbox</div>
+              <label class="sd-check"><input type="checkbox" checked /><span class="sd-check__box"><i data-lucide="check"></i></span> Aceito os termos</label><br/>
+              <label class="sd-check"><input type="checkbox" /><span class="sd-check__box"><i data-lucide="check"></i></span> Quero receber novidades</label>
+            </div>
+            <div>
+              <div class="sd-hint" style="margin-bottom:12px;">Radio</div>
+              <label class="sd-check sd-check--radio"><input type="radio" name="plano" checked /><span class="sd-check__box"></span> Plano anual</label><br/>
+              <label class="sd-check sd-check--radio"><input type="radio" name="plano" /><span class="sd-check__box"></span> Plano mensal</label>
+            </div>
+            <div>
+              <div class="sd-hint" style="margin-bottom:12px;">Switch</div>
+              <label class="sd-switch"><input type="checkbox" checked /><span class="sd-switch__track"></span> Notificações</label><br/><br/>
+              <label class="sd-switch"><input type="checkbox" /><span class="sd-switch__track"></span> Modo receitas favoritas</label>
+            </div>
+          </div>
+        </section>
+
+        <!-- ACCORDION / FAQ -->
+        <section id="accordion" class="ds-scroll-mt">
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:24px;">Accordion & FAQ</h3>
+          <div class="sd-accordion" data-accordion="single" style="max-width:760px;">
+            <div class="sd-accordion__item">
+              <button class="sd-accordion__trigger" aria-expanded="false" aria-controls="faq-1">Não tenho experiência na cozinha. Consigo acompanhar?<i data-lucide="chevron-down" class="sd-accordion__chevron"></i></button>
+              <div id="faq-1" class="sd-accordion__panel" role="region"><div class="sd-accordion__panel-inner">Sim. As aulas começam do zero, com técnica e teoria, para você entender cada passo — não apenas copiar.</div></div>
+            </div>
+            <div class="sd-accordion__item">
+              <button class="sd-accordion__trigger" aria-expanded="false" aria-controls="faq-2">As receitas funcionam mesmo?<i data-lucide="chevron-down" class="sd-accordion__chevron"></i></button>
+              <div id="faq-2" class="sd-accordion__panel" role="region"><div class="sd-accordion__panel-inner">Mais de 110 receitas testadas e aprovadas por 1.230 alunas em 30 países.</div></div>
+            </div>
+            <div class="sd-accordion__item">
+              <button class="sd-accordion__trigger" aria-expanded="false" aria-controls="faq-3">Preciso de ingredientes difíceis ou caros?<i data-lucide="chevron-down" class="sd-accordion__chevron"></i></button>
+              <div id="faq-3" class="sd-accordion__panel" role="region"><div class="sd-accordion__panel-inner">Não. Priorizamos substituições inteligentes com ingredientes acessíveis onde você estiver.</div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- NAVBAR -->
+        <section id="navbar" class="ds-scroll-mt">
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:24px;">Navbar</h3>
+          <div class="ds-specimen" style="padding:0;overflow:hidden;">
+            <nav class="flex items-center justify-between" style="padding:16px 24px;background:var(--sd-white);border-bottom:1px solid var(--sd-border);">
+              <div class="flex items-center gap-3">
+                <span class="sd-avatar sd-avatar--sm" style="font-family:var(--sd-font-heading);font-size:16px;">S</span>
+                <span class="font-heading" style="font-size:22px;font-weight:700;color:var(--sd-primary-dark);">Santo Doce</span>
+              </div>
+              <div class="hidden md:flex items-center gap-1">
+                <a href="#" class="sd-btn sd-btn--ghost sd-btn--sm">Receitas</a>
+                <a href="#" class="sd-btn sd-btn--ghost sd-btn--sm">Bônus</a>
+                <a href="#" class="sd-btn sd-btn--ghost sd-btn--sm">Depoimentos</a>
+                <a href="#" class="sd-btn sd-btn--primary sd-btn--sm">Entrar</a>
+              </div>
+              <button class="sd-btn sd-btn--ghost sd-btn--icon md:hidden" data-drawer-open="demo-drawer" aria-label="Abrir menu"><i data-lucide="menu" class="sd-icon"></i></button>
+            </nav>
+          </div>
+        </section>
+
+        <!-- HERO -->
+        <section id="hero" class="ds-scroll-mt">
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:24px;">Hero</h3>
+          <div class="ds-specimen" style="padding:0;overflow:hidden;">
+            <div style="display:grid;grid-template-columns:1fr;gap:0;" class="md:!grid-cols-2">
+              <div style="padding:48px;display:flex;flex-direction:column;justify-content:center;gap:20px;">
+                <span class="sd-badge sd-badge--gold" style="width:fit-content;"><i data-lucide="sparkles" style="width:14px;height:14px"></i> Oferta especial · R$250 off</span>
+                <h2 class="font-heading" style="font-size:clamp(32px,4vw,48px);font-weight:700;line-height:1.05;">Doces sem glúten, sem lactose e sem açúcar refinado.</h2>
+                <p style="color:var(--sd-text-secondary);">Mais gostosos que os tradicionais. Mais de 110 receitas testadas, ensinadas do zero.</p>
+                <div class="flex flex-wrap gap-3">
+                  <button class="sd-btn sd-btn--primary">Quero entrar <i data-lucide="arrow-right" class="sd-icon"></i></button>
+                  <button class="sd-btn sd-btn--outline">Ver por dentro</button>
+                </div>
+              </div>
+              <div style="background:linear-gradient(135deg,#EFE5DA,#F7F1EB);min-height:320px;display:flex;align-items:center;justify-content:center;position:relative;">
+                <div style="text-align:center;color:var(--sd-accent);">
+                  <i data-lucide="cake-slice" style="width:64px;height:64px;margin:0 auto;"></i>
+                  <p class="sd-hint" style="margin-top:12px;max-width:220px;">Foto: luz natural, tons quentes, madeira, confeitaria artesanal.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CARDS -->
+        <section id="cards" class="ds-scroll-mt">
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:24px;">Cards</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;">
+            <div class="sd-card sd-card--hover">
+              <div class="sd-avatar" style="background:var(--sd-primary-soft);color:var(--sd-primary);"><i data-lucide="milk"></i></div>
+              <h4 class="font-heading" style="font-size:24px;font-weight:600;margin:16px 0 8px;">O Santo Leite</h4>
+              <p style="color:var(--sd-text-secondary);font-size:16px;">A base sem lactose e sem caseína que transforma toda receita.</p>
+            </div>
+            <div class="sd-card sd-card--hover">
+              <div class="sd-avatar" style="background:var(--sd-gold-soft);color:var(--sd-secondary);"><i data-lucide="cookie"></i></div>
+              <h4 class="font-heading" style="font-size:24px;font-weight:600;margin:16px 0 8px;">Bolos fofinhos</h4>
+              <p style="color:var(--sd-text-secondary);font-size:16px;">Sem glúten, úmidos e que não se despedaçam ao cortar.</p>
+            </div>
+            <div class="sd-card sd-card--hover">
+              <div class="sd-avatar" style="background:#f0e7de;color:var(--sd-accent);"><i data-lucide="candy"></i></div>
+              <h4 class="font-heading" style="font-size:24px;font-weight:600;margin:16px 0 8px;">Brigadeiros</h4>
+              <p style="color:var(--sd-text-secondary);font-size:16px;">Sem leite condensado e sem açúcar refinado.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section id="testimonials" class="ds-scroll-mt">
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:24px;">Testimonials</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
+            <figure class="sd-card">
+              <div style="color:var(--sd-secondary);display:flex;gap:2px;">
+                <i data-lucide="star" style="width:18px;height:18px;fill:currentColor"></i><i data-lucide="star" style="width:18px;height:18px;fill:currentColor"></i><i data-lucide="star" style="width:18px;height:18px;fill:currentColor"></i><i data-lucide="star" style="width:18px;height:18px;fill:currentColor"></i><i data-lucide="star" style="width:18px;height:18px;fill:currentColor"></i>
+              </div>
+              <blockquote style="margin:16px 0;font-size:18px;">"Finalmente meus filhos comem doce sem que eu me sinta culpada. As receitas nunca falham."</blockquote>
+              <figcaption class="flex items-center gap-3">
+                <span class="sd-avatar sd-avatar--sm">MC</span>
+                <div><div style="font-weight:600;font-size:15px;">Marina Costa</div><div class="sd-hint">Aluna · Portugal</div></div>
+              </figcaption>
+            </figure>
+            <figure class="sd-card">
+              <div style="color:var(--sd-secondary);display:flex;gap:2px;">
+                <i data-lucide="star" style="width:18px;height:18px;fill:currentColor"></i><i data-lucide="star" style="width:18px;height:18px;fill:currentColor"></i><i data-lucide="star" style="width:18px;height:18px;fill:currentColor"></i><i data-lucide="star" style="width:18px;height:18px;fill:currentColor"></i><i data-lucide="star" style="width:18px;height:18px;fill:currentColor"></i>
+              </div>
+              <blockquote style="margin:16px 0;font-size:18px;">"Comecei do zero e hoje vendo doces sob encomenda. Mudou minha renda."</blockquote>
+              <figcaption class="flex items-center gap-3">
+                <span class="sd-avatar sd-avatar--sm">AL</span>
+                <div><div style="font-weight:600;font-size:15px;">Ana Luíza</div><div class="sd-hint">Aluna · Brasil</div></div>
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- PRICING -->
+        <section id="pricing" class="ds-scroll-mt">
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:24px;">Pricing</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;max-width:760px;">
+            <div class="sd-card">
+              <div class="sd-badge sd-badge--outline">Mensal</div>
+              <div class="font-heading" style="font-size:42px;font-weight:700;margin:16px 0 4px;">R$97<span style="font-size:16px;font-family:var(--sd-font-body);color:var(--sd-text-secondary)">/mês</span></div>
+              <p class="sd-hint">Acesso mês a mês, cancele quando quiser.</p>
+              <ul style="list-style:none;padding:0;margin:24px 0;display:grid;gap:12px;font-size:16px;">
+                <li class="flex items-center gap-2"><i data-lucide="check" style="width:18px;height:18px;color:var(--sd-success)"></i> 200+ aulas em vídeo</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" style="width:18px;height:18px;color:var(--sd-success)"></i> 110+ receitas em PDF</li>
+              </ul>
+              <button class="sd-btn sd-btn--outline sd-btn--block">Escolher mensal</button>
+            </div>
+            <div class="sd-card" style="border:2px solid var(--sd-secondary);box-shadow:var(--sd-shadow-md);position:relative;">
+              <span class="sd-badge sd-badge--gold" style="position:absolute;top:-14px;right:24px;"><i data-lucide="crown" style="width:14px;height:14px"></i> Mais popular</span>
+              <div class="sd-badge sd-badge--green">Anual</div>
+              <div class="font-heading" style="font-size:42px;font-weight:700;margin:16px 0 4px;">12x R$60,50</div>
+              <p class="sd-hint"><s style="color:#b0a595">De R$837</s> · comunidade VIP + todos os bônus</p>
+              <ul style="list-style:none;padding:0;margin:24px 0;display:grid;gap:12px;font-size:16px;">
+                <li class="flex items-center gap-2"><i data-lucide="check" style="width:18px;height:18px;color:var(--sd-success)"></i> Tudo do mensal</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" style="width:18px;height:18px;color:var(--sd-success)"></i> Suporte direto com a Bruna</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" style="width:18px;height:18px;color:var(--sd-success)"></i> 5 bônus exclusivos</li>
+              </ul>
+              <button class="sd-btn sd-btn--primary sd-btn--block">Quero entrar no Santo Doce</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- CTA -->
+        <section id="cta" class="ds-scroll-mt">
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:24px;">CTA</h3>
+          <div style="background:var(--sd-primary);border-radius:32px;padding:56px;text-align:center;color:#fff;position:relative;overflow:hidden;">
+            <span class="sd-badge sd-badge--gold" style="margin-bottom:16px;">A vida saudável que você sempre quis</span>
+            <h2 class="font-heading" style="font-size:clamp(28px,4vw,42px);font-weight:700;color:#fff;max-width:640px;margin:0 auto 16px;">Dá para comer doce todos os dias sem culpa.</h2>
+            <p style="color:#D7E5DE;max-width:520px;margin:0 auto 28px;">Junte-se a mais de 1.230 alunas em 30 países. Sua vez é agora.</p>
+            <button class="sd-btn sd-btn--primary">Quero entrar no Santo Doce <i data-lucide="arrow-right" class="sd-icon"></i></button>
+          </div>
+        </section>
+
+        <!-- BADGES & TAGS -->
+        <section id="badges" class="ds-scroll-mt">
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:24px;">Badges & Tags</h3>
+          <div class="ds-specimen" style="display:flex;flex-direction:column;gap:24px;">
+            <div class="flex flex-wrap gap-3 items-center">
+              <span class="sd-badge sd-badge--gold"><i data-lucide="sparkles" style="width:14px;height:14px"></i> Novo</span>
+              <span class="sd-badge sd-badge--green">Verde</span>
+              <span class="sd-badge sd-badge--success"><i data-lucide="check" style="width:14px;height:14px"></i> Aprovado</span>
+              <span class="sd-badge sd-badge--error">Esgotando</span>
+              <span class="sd-badge sd-badge--outline">Outline</span>
+            </div>
+            <div class="flex flex-wrap gap-3 items-center">
+              <span class="sd-tag">Sem glúten <button aria-label="Remover"><i data-lucide="x" style="width:14px;height:14px"></i></button></span>
+              <span class="sd-tag">Sem lactose <button aria-label="Remover"><i data-lucide="x" style="width:14px;height:14px"></i></button></span>
+              <span class="sd-tag">Sem açúcar refinado <button aria-label="Remover"><i data-lucide="x" style="width:14px;height:14px"></i></button></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ALERT & TOAST -->
+        <section id="feedback" class="ds-scroll-mt">
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:24px;">Alert & Toast</h3>
+          <div class="ds-specimen" style="display:flex;flex-direction:column;gap:16px;">
+            <div class="sd-alert sd-alert--info"><i data-lucide="info" class="sd-alert__icon"></i><div><div class="sd-alert__title">Acesso liberado</div>Você tem 12 meses para aprender no seu ritmo.</div></div>
+            <div class="sd-alert sd-alert--success"><i data-lucide="check-circle-2" class="sd-alert__icon"></i><div><div class="sd-alert__title">Pagamento confirmado</div>Enviamos seus dados de acesso por e-mail.</div></div>
+            <div class="sd-alert sd-alert--gold"><i data-lucide="sparkles" class="sd-alert__icon"></i><div><div class="sd-alert__title">Bônus desbloqueados</div>Páscoa Lucrativa e Doces Juninos já estão na sua conta.</div></div>
+            <div class="sd-alert sd-alert--error"><i data-lucide="alert-circle" class="sd-alert__icon"></i><div><div class="sd-alert__title">Ops!</div>Não foi possível processar o pagamento. Tente novamente.</div></div>
+            <div class="flex flex-wrap gap-3" style="margin-top:8px;">
+              <button class="sd-btn sd-btn--secondary sd-btn--sm" data-toast="success" data-toast-title="Tudo certo!" data-toast-message="Receita salva nos favoritos.">Toast sucesso</button>
+              <button class="sd-btn sd-btn--outline sd-btn--sm" data-toast="gold" data-toast-title="Bem-vinda!" data-toast-message="Seu acesso ao Santo Doce está pronto.">Toast dourado</button>
+              <button class="sd-btn sd-btn--outline sd-btn--sm" data-toast="error" data-toast-title="Algo deu errado" data-toast-message="Verifique sua conexão.">Toast erro</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- MODAL & DRAWER -->
+        <section id="overlays" class="ds-scroll-mt">
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:24px;">Modal & Drawer</h3>
+          <div class="ds-specimen flex flex-wrap gap-3">
+            <button class="sd-btn sd-btn--primary" data-modal-open="demo-modal">Abrir modal</button>
+            <button class="sd-btn sd-btn--outline" data-drawer-open="demo-drawer">Abrir drawer</button>
+          </div>
+        </section>
+
+        <!-- TABS -->
+        <section id="tabs" class="ds-scroll-mt">
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:24px;">Tabs</h3>
+          <div class="ds-specimen" data-tabs>
+            <div class="sd-tabs__list" role="tablist">
+              <button class="sd-tabs__trigger" role="tab" aria-selected="true" aria-controls="tab-1" id="tt-1">Receitas</button>
+              <button class="sd-tabs__trigger" role="tab" aria-selected="false" aria-controls="tab-2" id="tt-2">Bônus</button>
+              <button class="sd-tabs__trigger" role="tab" aria-selected="false" aria-controls="tab-3" id="tt-3">Comunidade</button>
+            </div>
+            <div id="tab-1" class="sd-tabs__panel" role="tabpanel" aria-labelledby="tt-1"><p style="color:var(--sd-text-secondary)">110+ receitas organizadas por categoria, com fichas em PDF.</p></div>
+            <div id="tab-2" class="sd-tabs__panel" role="tabpanel" aria-labelledby="tt-2" hidden><p style="color:var(--sd-text-secondary)">Páscoa Lucrativa, Chef Emanuel Savio, Doces Juninos e mais.</p></div>
+            <div id="tab-3" class="sd-tabs__panel" role="tabpanel" aria-labelledby="tt-3" hidden><p style="color:var(--sd-text-secondary)">Grupo VIP com suporte direto da Bruna, todos os dias.</p></div>
+          </div>
+        </section>
+
+        <!-- BREADCRUMB & PAGINATION -->
+        <section id="navigation" class="ds-scroll-mt">
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:24px;">Breadcrumb & Pagination</h3>
+          <div class="ds-specimen" style="display:flex;flex-direction:column;gap:28px;">
+            <nav class="sd-breadcrumb" aria-label="Breadcrumb">
+              <a href="#">Início</a><i data-lucide="chevron-right" class="sd-breadcrumb__sep" style="width:14px;height:14px"></i>
+              <a href="#">Receitas</a><i data-lucide="chevron-right" class="sd-breadcrumb__sep" style="width:14px;height:14px"></i>
+              <span aria-current="page">Bolos sem glúten</span>
+            </nav>
+            <div class="sd-pagination">
+              <button class="sd-page" aria-label="Anterior" disabled><i data-lucide="chevron-left" style="width:18px;height:18px"></i></button>
+              <button class="sd-page" aria-current="page">1</button>
+              <button class="sd-page">2</button>
+              <button class="sd-page">3</button>
+              <span class="sd-page" style="border:none;background:none;">…</span>
+              <button class="sd-page">9</button>
+              <button class="sd-page" aria-label="Próxima"><i data-lucide="chevron-right" style="width:18px;height:18px"></i></button>
+            </div>
+          </div>
+        </section>
+
+        <!-- AVATAR & DROPDOWN -->
+        <section id="avatar" class="ds-scroll-mt">
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:24px;">Avatar & Dropdown</h3>
+          <div class="ds-specimen flex flex-wrap items-center gap-6">
+            <div class="flex items-center gap-3">
+              <span class="sd-avatar sd-avatar--sm">SD</span>
+              <span class="sd-avatar">BH</span>
+              <span class="sd-avatar sd-avatar--lg" style="background:var(--sd-secondary)">A</span>
+            </div>
+            <div class="sd-dropdown" data-dropdown>
+              <button class="sd-btn sd-btn--outline" data-dropdown-trigger aria-haspopup="true" aria-expanded="false">
+                Minha conta <i data-lucide="chevron-down" class="sd-icon"></i>
+              </button>
+              <div class="sd-dropdown__menu" role="menu">
+                <button class="sd-dropdown__item" role="menuitem"><i data-lucide="user" style="width:16px;height:16px"></i> Perfil</button>
+                <button class="sd-dropdown__item" role="menuitem"><i data-lucide="book-open" style="width:16px;height:16px"></i> Minhas receitas</button>
+                <button class="sd-dropdown__item" role="menuitem"><i data-lucide="settings" style="width:16px;height:16px"></i> Configurações</button>
+                <div class="sd-dropdown__sep"></div>
+                <button class="sd-dropdown__item" role="menuitem" style="color:var(--sd-error)"><i data-lucide="log-out" style="width:16px;height:16px"></i> Sair</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PROGRESS & LOADING -->
+        <section id="status" class="ds-scroll-mt">
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:24px;">Progress · Loading · Skeleton</h3>
+          <div class="ds-specimen" style="display:flex;flex-direction:column;gap:28px;">
+            <div>
+              <div class="sd-hint" style="margin-bottom:8px;">Progresso do módulo — 68%</div>
+              <div class="sd-progress"><div class="sd-progress__bar" data-progress="68" style="width:0"></div></div>
+            </div>
+            <div class="flex items-center gap-6">
+              <div class="flex items-center gap-3"><span class="sd-spinner"></span><span class="sd-hint">Carregando receitas...</span></div>
+            </div>
+            <div>
+              <div class="sd-hint" style="margin-bottom:12px;">Skeleton (card carregando)</div>
+              <div class="sd-card" style="display:flex;gap:16px;align-items:center;">
+                <div class="sd-skeleton" style="width:56px;height:56px;border-radius:999px;flex:none;"></div>
+                <div style="flex:1;display:flex;flex-direction:column;gap:10px;">
+                  <div class="sd-skeleton" style="height:16px;width:60%;"></div>
+                  <div class="sd-skeleton" style="height:12px;width:90%;"></div>
+                  <div class="sd-skeleton" style="height:12px;width:75%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- FOOTER -->
+        <section id="footer" class="ds-scroll-mt">
+          <h3 class="font-heading" style="font-size:34px;font-weight:600;margin-bottom:24px;">Footer</h3>
+          <div class="ds-specimen" style="padding:0;overflow:hidden;">
+            <footer style="background:var(--sd-primary-dark);color:#EFE5DA;padding:48px;">
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:32px;">
+                <div>
+                  <div class="flex items-center gap-3" style="margin-bottom:16px;">
+                    <span class="sd-avatar sd-avatar--sm" style="background:var(--sd-secondary);font-family:var(--sd-font-heading)">S</span>
+                    <span class="font-heading" style="font-size:22px;font-weight:700;color:#fff;">Santo Doce</span>
+                  </div>
+                  <p style="font-size:14px;opacity:.8;max-width:240px;">Confeitaria saudável, artesanal e sem culpa. Do zero ao seu primeiro doce.</p>
+                </div>
+                <div>
+                  <div style="font-weight:600;color:#fff;margin-bottom:12px;">Curso</div>
+                  <ul style="list-style:none;padding:0;display:grid;gap:8px;font-size:14px;opacity:.85;">
+                    <li><a href="#" style="color:inherit;text-decoration:none;">Receitas</a></li>
+                    <li><a href="#" style="color:inherit;text-decoration:none;">Bônus</a></li>
+                    <li><a href="#" style="color:inherit;text-decoration:none;">Depoimentos</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <div style="font-weight:600;color:#fff;margin-bottom:12px;">Suporte</div>
+                  <ul style="list-style:none;padding:0;display:grid;gap:8px;font-size:14px;opacity:.85;">
+                    <li><a href="#" style="color:inherit;text-decoration:none;">FAQ</a></li>
+                    <li><a href="#" style="color:inherit;text-decoration:none;">Contato</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <div style="font-weight:600;color:#fff;margin-bottom:12px;">Receba receitas</div>
+                  <div class="flex gap-2">
+                    <input class="sd-input" placeholder="Seu e-mail" style="height:48px;min-height:48px;" />
+                    <button class="sd-btn sd-btn--primary sd-btn--icon" style="height:48px;width:48px;" aria-label="Assinar"><i data-lucide="arrow-right" class="sd-icon"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div style="border-top:1px solid rgba(255,255,255,.12);margin-top:32px;padding-top:20px;font-size:13px;opacity:.7;">© 2026 · Santo Doce · Todos os direitos reservados.</div>
+            </footer>
+          </div>
+        </section>
+
+        <!-- BOAS PRÁTICAS -->
+        <section id="practices" class="ds-scroll-mt">
+          <p class="ds-eyebrow">Guia</p>
+          <h2 class="font-heading" style="font-size:42px;font-weight:600;margin:8px 0 24px;">Boas práticas</h2>
+          <div style="display:grid;grid-template-columns:1fr;gap:24px;" class="md:!grid-cols-2">
+            <div class="sd-card" style="border-left:4px solid var(--sd-success);">
+              <div class="flex items-center gap-2" style="color:var(--sd-success);font-weight:600;margin-bottom:16px;"><i data-lucide="check-check" style="width:20px;height:20px"></i> Faça</div>
+              <ul style="list-style:none;padding:0;display:grid;gap:12px;font-size:16px;color:var(--sd-text-secondary)">
+                <li>Muito espaço em branco e poucos elementos por seção.</li>
+                <li>Títulos em Cormorant, corpo em Poppins — contraste forte.</li>
+                <li>Um CTA dourado por seção, sempre bem destacado.</li>
+                <li>Fotos com luz natural, tons quentes e madeira.</li>
+                <li>Foco visível e área de clique ≥ 44px (WCAG AA).</li>
+              </ul>
+            </div>
+            <div class="sd-card" style="border-left:4px solid var(--sd-error);">
+              <div class="flex items-center gap-2" style="color:var(--sd-error);font-weight:600;margin-bottom:16px;"><i data-lucide="x" style="width:20px;height:20px"></i> Evite</div>
+              <ul style="list-style:none;padding:0;display:grid;gap:12px;font-size:16px;color:var(--sd-text-secondary)">
+                <li>Visual tecnológico, futurista ou genérico.</li>
+                <li>Sombras pesadas ou gradientes chamativos.</li>
+                <li>Imagens muito saturadas ou frias.</li>
+                <li>Animações longas ou exageradas (> 300ms).</li>
+                <li>Excesso de cores fora da paleta da marca.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sd-card" style="margin-top:24px;">
+            <h4 class="font-heading" style="font-size:24px;font-weight:600;margin-bottom:12px;">Pronto para Tailwind CSS</h4>
+            <p style="color:var(--sd-text-secondary);margin-bottom:16px;">Os tokens estão mapeados em <code class="ds-code">tailwind.config.js</code>. Exemplos de uso:</p>
+            <pre style="background:#0A4835;color:#EFE5DA;padding:20px;border-radius:12px;overflow:auto;font-size:13px;line-height:1.7;"><code>&lt;button class="bg-gold hover:bg-gold-dark text-white h-14 px-8 rounded-full font-semibold"&gt;
+  Quero entrar no Santo Doce
+&lt;/button&gt;
+
+&lt;div class="bg-white rounded-lg shadow-sm p-5 border border-line"&gt;...&lt;/div&gt;
+
+&lt;h1 class="font-heading text-h1 text-ink"&gt;Doces sem culpa&lt;/h1&gt;</code></pre>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ============ MODAL DEMO ============ -->
+  <div class="sd-overlay" id="demo-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="sd-modal">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <span class="sd-badge sd-badge--gold" style="margin-bottom:12px;"><i data-lucide="sparkles" style="width:14px;height:14px"></i> Oferta especial</span>
+          <h4 id="modal-title" class="font-heading" style="font-size:28px;font-weight:600;">Garanta seu acesso hoje</h4>
+        </div>
+        <button class="sd-btn sd-btn--ghost sd-btn--icon" data-modal-close aria-label="Fechar"><i data-lucide="x" class="sd-icon"></i></button>
+      </div>
+      <p style="color:var(--sd-text-secondary);margin:12px 0 24px;">R$250 de desconto + 5 bônus exclusivos. Acesso por 12 meses e suporte direto com a Bruna.</p>
+      <div class="flex gap-3">
+        <button class="sd-btn sd-btn--primary sd-btn--block" data-modal-close>Quero entrar</button>
+        <button class="sd-btn sd-btn--ghost" data-modal-close>Agora não</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ DRAWER DEMO ============ -->
+  <div class="sd-drawer-overlay" id="demo-drawer-overlay"></div>
+  <aside class="sd-drawer" id="demo-drawer" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="flex items-center justify-between" style="margin-bottom:32px;">
+      <span class="font-heading" style="font-size:22px;font-weight:700;color:var(--sd-primary-dark);">Menu</span>
+      <button class="sd-btn sd-btn--ghost sd-btn--icon" data-drawer-close="demo-drawer" aria-label="Fechar"><i data-lucide="x" class="sd-icon"></i></button>
+    </div>
+    <nav style="display:flex;flex-direction:column;gap:8px;">
+      <a href="#" class="sd-dropdown__item"><i data-lucide="book-open" style="width:18px;height:18px"></i> Receitas</a>
+      <a href="#" class="sd-dropdown__item"><i data-lucide="gift" style="width:18px;height:18px"></i> Bônus</a>
+      <a href="#" class="sd-dropdown__item"><i data-lucide="quote" style="width:18px;height:18px"></i> Depoimentos</a>
+      <a href="#" class="sd-dropdown__item"><i data-lucide="help-circle" style="width:18px;height:18px"></i> FAQ</a>
+    </nav>
+    <button class="sd-btn sd-btn--primary sd-btn--block" style="margin-top:24px;" data-drawer-close="demo-drawer">Quero entrar no Santo Doce</button>
+  </aside>
+
+  <script src="assets/js/design-system.js"></script>
+</body>
+</html>

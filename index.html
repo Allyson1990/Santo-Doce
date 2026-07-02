@@ -1,0 +1,1771 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Santo Doce — Confeitaria saudável, artesanal e sem culpa</title>
+  <meta name="description" content="Doces sem glúten, sem lactose e sem açúcar refinado que ficam mais gostosos que os tradicionais. Mais de 110 receitas testadas." />
+
+  <!-- Fontes da marca -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Fredoka:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind + tokens da marca -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/js/tailwind.config.js"></script>
+
+  <!-- Ícones Lucide -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <!-- Design System (tokens + componentes) -->
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+
+  <style>
+    /* ============================================================
+       CORES ALINHADAS AO PDF (BRUNADESKTOP)
+       ============================================================ */
+    :root {
+      --sd-primary: #004D3A;
+      --sd-primary-dark: #004D3A;
+      --sd-secondary: #F6B850;
+      --sd-secondary-dark: #E5A640;
+      --sd-background: #F2E8DE;
+      --sd-surface: #F2E8DD;
+      --sd-section-white: #FFFBF7;
+      --sd-header-bg: #F3E6DC;
+    }
+
+    body {
+      background: var(--sd-section-white);
+    }
+
+    /* Botões dourados — honey + texto verde (PDF) */
+    .sd-btn--primary {
+      background: var(--sd-secondary);
+      color: var(--sd-primary);
+      font-weight: 600;
+    }
+    .sd-btn--primary:hover {
+      background: var(--sd-secondary-dark);
+      color: var(--sd-primary);
+    }
+    .sd-btn--primary .sd-icon {
+      color: var(--sd-primary);
+    }
+
+    /* Botões verdes — hero e receitas (PDF) */
+    .sd-btn--secondary {
+      background: var(--sd-primary);
+      color: var(--sd-white);
+    }
+    .sd-btn--secondary:hover {
+      background: var(--sd-primary-dark);
+      color: var(--sd-white);
+    }
+
+    /* ============================================================
+       HEADER (HERO) — Santo Doce
+       ============================================================ */
+    .announcement {
+      background: var(--sd-primary-dark);
+      color: var(--sd-white);
+      text-align: center;
+      font-size: var(--sd-fs-body-sm);
+      font-weight: 500;
+      padding: 10px 24px;
+    }
+    .announcement__inner {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      line-height: 1.4;
+    }
+    .announcement__inner i,
+    .announcement__inner svg {
+      color: var(--sd-secondary);
+      width: 18px;
+      height: 18px;
+      flex: none;
+    }
+    .announcement strong { font-weight: 700; letter-spacing: 0.01em; }
+
+    .header {
+      position: relative;
+      background: var(--sd-header-bg);
+      overflow: visible;
+      z-index: 1;
+    }
+    .header__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      align-items: end;
+      padding: 48px 0 0;
+    }
+
+    .header .ds-container.header__grid {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    /* ---- Coluna esquerda (conteúdo) ---- */
+    .header__content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 560px;
+      align-self: center;
+      padding-bottom: 72px;
+    }
+
+    /* Logo — wordmark Santo Doce */
+    .header__logo { display: inline-flex; width: fit-content; text-decoration: none; }
+    .header__logo-mark {
+      display: block;
+      height: clamp(64px, 10vw, 80px);
+      width: auto;
+    }
+    .header__logo-text {
+      fill: var(--sd-primary);
+      font-family: "Fredoka", sans-serif;
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .header__title {
+      font-family: var(--sd-font-body);
+      font-weight: 600;
+      font-size: clamp(1.625rem, 3.6vw, 2.375rem);
+      line-height: 1.2;
+      color: var(--sd-text-primary);
+    }
+    .header__title strong { color: var(--sd-primary); font-weight: 700; }
+
+    .header__desc {
+      font-size: var(--sd-fs-body-sm);
+      line-height: 1.7;
+      color: var(--sd-text-secondary);
+      max-width: 480px;
+    }
+    .header__desc strong { color: var(--sd-text-primary); font-weight: 600; }
+
+    .header__cta { width: fit-content; margin-top: 8px; }
+    .header__cta i { color: var(--sd-secondary); }
+    .header__cta:hover,
+    .section-recipes__cta .sd-btn--secondary:hover {
+      background: #003D2E;
+      color: var(--sd-white);
+      box-shadow: var(--sd-shadow-md);
+    }
+    .header__cta:hover i,
+    .section-recipes__cta .sd-btn--secondary:hover .sd-icon {
+      color: var(--sd-secondary);
+    }
+
+    /* ---- Coluna direita (imagem) ---- */
+    .header__media {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+      margin: 0;
+      padding: 0;
+      line-height: 0;
+    }
+
+    .header__image {
+      width: 100%;
+      max-width: min(100%, 520px);
+      height: auto;
+      display: block;
+      margin: 0 0 0 auto;
+      padding: 0;
+      object-fit: contain;
+      object-position: right bottom;
+    }
+
+    /* Indicador de rolagem */
+    .header__scroll {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translate(-50%, 50%);
+      width: 40px;
+      height: 40px;
+      border-radius: var(--sd-radius-full);
+      background: var(--sd-white);
+      box-shadow: var(--sd-shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sd-primary);
+      text-decoration: none;
+      z-index: 2;
+      animation: header-bob 2s var(--sd-ease) infinite;
+    }
+    @keyframes header-bob {
+      0%, 100% { transform: translate(-50%, 50%); }
+      50% { transform: translate(-50%, calc(50% + 6px)); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .header__scroll { animation: none; }
+    }
+
+    /* ---- Responsivo ---- */
+    @media (min-width: 768px) {
+      .header__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        padding-top: 56px;
+        align-items: stretch;
+      }
+
+      .header .ds-container.header__grid {
+        padding-right: 0;
+      }
+
+      .header__content {
+        align-self: center;
+        padding-bottom: 80px;
+      }
+
+      .header__media {
+        align-self: stretch;
+        justify-content: flex-end;
+        align-items: flex-end;
+      }
+
+      .header__image {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .header__grid {
+        grid-template-columns: 1.05fr 0.95fr;
+      }
+
+      .header__image {
+        max-width: 560px;
+      }
+    }
+
+    /* ============================================================
+       SEÇÃO — Foi feito para você
+       ============================================================ */
+    .section-for-you {
+      background: var(--sd-section-white);
+      padding: var(--sd-space-10) 0 var(--sd-space-8);
+    }
+
+    .section-for-you__header {
+      text-align: center;
+      margin-bottom: var(--sd-space-9);
+    }
+
+    .section-for-you__brand {
+      font-family: var(--sd-font-body);
+      font-size: clamp(1.75rem, 4vw, 2.625rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--sd-text-primary);
+      margin-bottom: var(--sd-space-3);
+    }
+
+    .section-for-you__title {
+      font-family: var(--sd-font-body);
+      font-size: clamp(1.75rem, 4vw, 2.625rem);
+      font-weight: 700;
+      color: var(--sd-primary);
+      line-height: 1.2;
+    }
+
+    .section-for-you__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--sd-space-7);
+      margin-bottom: var(--sd-space-10);
+    }
+
+    @media (min-width: 640px) {
+      .section-for-you__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .section-for-you__grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--sd-space-6) var(--sd-space-5);
+      }
+    }
+
+    .for-you-card {
+      position: relative;
+      background: var(--sd-surface);
+      border-radius: var(--sd-radius-sm);
+      padding: var(--sd-space-7) var(--sd-space-5) var(--sd-space-6);
+      text-align: center;
+      margin-top: 22px;
+    }
+
+    .for-you-card__icon {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      width: 44px;
+      height: 44px;
+      background: var(--sd-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--sd-shadow-sm);
+    }
+
+    .for-you-card__icon-inner {
+      transform: rotate(-45deg);
+      width: 22px;
+      height: 22px;
+      background: var(--sd-white);
+      border-radius: var(--sd-radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sd-primary);
+    }
+
+    .for-you-card__icon-inner svg {
+      width: 14px;
+      height: 14px;
+      stroke-width: 2.5;
+    }
+
+    .for-you-card__text {
+      font-size: var(--sd-fs-body-sm);
+      font-weight: 500;
+      line-height: 1.65;
+      color: var(--sd-text-primary);
+      margin: 0;
+    }
+
+    .section-for-you__cta {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ============================================================
+       SEÇÃO — Veja como é dentro do Santo Doce
+       ============================================================ */
+    .section-inside {
+      position: relative;
+      background: var(--sd-section-white);
+      padding-top: var(--sd-space-7);
+      padding-bottom: var(--sd-space-6);
+    }
+
+    .section-inside__inner {
+      padding-bottom: var(--sd-space-10);
+    }
+
+    .section-inside__header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto var(--sd-space-9);
+    }
+
+    .section-inside__heading {
+      font-family: var(--sd-font-body);
+      font-size: clamp(1.75rem, 4vw, 2.625rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--sd-text-primary);
+      margin-bottom: var(--sd-space-5);
+    }
+
+    .section-inside__heading strong {
+      color: var(--sd-primary);
+      font-weight: 700;
+    }
+
+    .section-inside__desc {
+      font-size: var(--sd-fs-body-sm);
+      line-height: 1.7;
+      color: var(--sd-text-secondary);
+      margin: 0;
+    }
+
+    .section-inside__gallery {
+      display: flex;
+      gap: var(--sd-space-3);
+      justify-content: center;
+      overflow-x: auto;
+      padding: var(--sd-space-2) var(--sd-space-3) var(--sd-space-2);
+      margin-bottom: var(--sd-space-9);
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .section-inside__gallery::-webkit-scrollbar { display: none; }
+
+    .section-inside__thumb {
+      flex: 0 0 auto;
+      width: clamp(132px, 17vw, 196px);
+      aspect-ratio: 3 / 4.2;
+      border-radius: var(--sd-radius-sm);
+      overflow: hidden;
+      background: var(--sd-surface);
+      margin: 0;
+    }
+
+    .section-inside__thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .section-inside__cta {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Divisor inferior — mesmo estilo do header (círculo branco + chevron verde) */
+    .section-divider {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translate(-50%, 50%);
+      width: 40px;
+      height: 40px;
+      border-radius: var(--sd-radius-full);
+      background: var(--sd-white);
+      box-shadow: var(--sd-shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sd-primary);
+      text-decoration: none;
+      z-index: 2;
+      animation: section-divider-bob 2s var(--sd-ease) infinite;
+    }
+
+    @keyframes section-divider-bob {
+      0%, 100% { transform: translate(-50%, 50%); }
+      50% { transform: translate(-50%, calc(50% + 6px)); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .section-divider { animation: none; }
+    }
+
+    .section-inside__tail {
+      display: none;
+    }
+
+    /* ============================================================
+       SEÇÃO — O que você vai dominar
+       ============================================================ */
+    .section-dominate {
+      background: var(--sd-surface);
+      padding: var(--sd-space-10) 0 var(--sd-space-12);
+    }
+
+    .dominate-compare {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--sd-space-4);
+      max-width: 880px;
+      margin: 0 auto var(--sd-space-7);
+    }
+
+    @media (min-width: 768px) {
+      .dominate-compare {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--sd-space-4);
+      }
+    }
+
+    .dominate-card {
+      background: var(--sd-primary);
+      color: var(--sd-white);
+      border-radius: var(--sd-radius-md);
+      padding: var(--sd-space-5) var(--sd-space-4);
+    }
+
+    .dominate-card__title {
+      font-family: var(--sd-font-body);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      line-height: 1.35;
+      text-align: center;
+      margin: 0 0 var(--sd-space-4);
+      color: var(--sd-white);
+    }
+
+    .dominate-card__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .dominate-card__list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    .dominate-card__list i {
+      flex: none;
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      color: var(--sd-secondary);
+    }
+
+    .dominate-compare__badge {
+      display: flex;
+      justify-content: center;
+      margin: calc(var(--sd-space-2) * -1) 0;
+      z-index: 2;
+    }
+
+    @media (min-width: 768px) {
+      .dominate-compare__badge {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+      }
+    }
+
+    .dominate-badge {
+      width: 40px;
+      height: 40px;
+      background: var(--sd-secondary);
+      transform: rotate(45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--sd-shadow-sm);
+    }
+
+    .dominate-badge__inner {
+      transform: rotate(-45deg);
+      color: var(--sd-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dominate-badge__inner i,
+    .dominate-badge__inner .sd-icon-whatsapp {
+      width: 18px;
+      height: 18px;
+    }
+
+    .sd-icon-whatsapp {
+      flex: none;
+      display: block;
+    }
+
+    .support-card {
+      position: relative;
+      background: var(--sd-white);
+      border: none;
+      border-radius: var(--sd-radius-md);
+      padding: var(--sd-space-7) var(--sd-space-5) var(--sd-space-6);
+      text-align: center;
+      margin-top: 22px;
+      margin-bottom: var(--sd-space-7);
+      box-shadow: none;
+      max-width: 880px;
+      margin-inline: auto;
+    }
+
+    .support-card__icon {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .support-card__title {
+      font-family: var(--sd-font-body);
+      font-size: var(--sd-fs-body);
+      font-weight: 700;
+      color: var(--sd-primary);
+      margin: var(--sd-space-4) 0 var(--sd-space-4);
+      line-height: 1.35;
+    }
+
+    .support-card__text {
+      font-size: var(--sd-fs-body-sm);
+      line-height: 1.7;
+      color: var(--sd-text-secondary);
+      margin: 0;
+      max-width: 640px;
+      margin-inline: auto;
+    }
+
+    .section-dominate__cta {
+      display: flex;
+      justify-content: center;
+    }
+
+    .section-dominate__cta .sd-btn--primary {
+      box-shadow: none;
+    }
+
+    .section-dominate__cta .sd-btn--primary:hover {
+      box-shadow: none;
+    }
+
+    /* ============================================================
+       SEÇÃO — Depoimentos das alunas
+       ============================================================ */
+    .section-testimonials {
+      background: var(--sd-section-white);
+      padding: var(--sd-space-10) 0 var(--sd-space-12);
+    }
+
+    .section-testimonials__header {
+      text-align: center;
+      margin-bottom: var(--sd-space-9);
+    }
+
+    .section-testimonials__heading {
+      font-family: var(--sd-font-body);
+      font-size: clamp(1.75rem, 4vw, 2.625rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--sd-text-primary);
+      margin: 0;
+    }
+
+    .section-testimonials__heading strong {
+      display: block;
+      color: var(--sd-primary);
+      font-weight: 700;
+    }
+
+    .section-testimonials__gallery {
+      display: flex;
+      gap: var(--sd-space-3);
+      justify-content: center;
+      overflow-x: auto;
+      padding: var(--sd-space-2) var(--sd-space-3);
+      margin-bottom: var(--sd-space-9);
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .section-testimonials__gallery::-webkit-scrollbar { display: none; }
+
+    .section-testimonials__thumb {
+      flex: 0 0 auto;
+      width: clamp(140px, 18vw, 220px);
+      aspect-ratio: 9 / 16;
+      border-radius: var(--sd-radius-sm);
+      overflow: hidden;
+      background: #1a1a1a;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .section-testimonials__thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+    }
+
+    .section-testimonials__cta {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ============================================================
+       SEÇÃO — Bônus exclusivos
+       ============================================================ */
+    .section-bonus {
+      position: relative;
+      background: var(--sd-primary);
+      padding: var(--sd-space-12) 0 var(--sd-space-12);
+    }
+
+    .section-bonus__divider {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      border-radius: var(--sd-radius-full);
+      background: var(--sd-white);
+      box-shadow: var(--sd-shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sd-primary);
+      z-index: 2;
+      animation: section-divider-top-bob 2s var(--sd-ease) infinite;
+    }
+
+    .section-bonus__header {
+      text-align: center;
+      margin-bottom: var(--sd-space-9);
+    }
+
+    .section-bonus__heading {
+      font-family: var(--sd-font-body);
+      font-size: clamp(1.5rem, 3.5vw, 2.125rem);
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--sd-white);
+      margin: 0;
+    }
+
+    .section-bonus__heading strong {
+      display: block;
+      color: var(--sd-secondary);
+      font-weight: 700;
+    }
+
+    .bonus-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--sd-space-5);
+      max-width: 1040px;
+      margin: 0 auto var(--sd-space-9);
+    }
+
+    @media (min-width: 640px) {
+      .bonus-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 900px) {
+      .bonus-grid {
+        grid-template-columns: repeat(6, 1fr);
+      }
+      .bonus-card:nth-child(1) { grid-column: 1 / 3; }
+      .bonus-card:nth-child(2) { grid-column: 3 / 5; }
+      .bonus-card:nth-child(3) { grid-column: 5 / 7; }
+      .bonus-card:nth-child(4) { grid-column: 2 / 4; }
+      .bonus-card:nth-child(5) { grid-column: 4 / 6; }
+    }
+
+    .bonus-card {
+      background: var(--sd-background);
+      border-radius: var(--sd-radius-sm);
+      padding: var(--sd-space-7) var(--sd-space-5) var(--sd-space-6);
+      text-align: center;
+    }
+
+    .bonus-card__icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto var(--sd-space-4);
+      background: var(--sd-secondary);
+      border-radius: var(--sd-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sd-white);
+    }
+
+    .bonus-card__icon i {
+      width: 24px;
+      height: 24px;
+    }
+
+    .bonus-card__title {
+      font-family: var(--sd-font-body);
+      font-size: var(--sd-fs-body-sm);
+      font-weight: 700;
+      color: var(--sd-primary);
+      margin: 0 0 var(--sd-space-3);
+      line-height: 1.35;
+    }
+
+    .bonus-card__text {
+      font-size: var(--sd-fs-body-sm);
+      line-height: 1.65;
+      color: var(--sd-text-secondary);
+      margin: 0;
+    }
+
+    .section-bonus__cta {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ============================================================
+       SEÇÃO — 110+ receitas
+       ============================================================ */
+    .section-recipes {
+      background: var(--sd-section-white);
+      padding: var(--sd-space-10) 0 var(--sd-space-12);
+    }
+
+    .section-recipes__header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto var(--sd-space-9);
+    }
+
+    .section-recipes__heading {
+      font-family: var(--sd-font-body);
+      font-size: clamp(1.5rem, 3.5vw, 2.125rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--sd-text-primary);
+      margin: 0;
+    }
+
+    .section-recipes__heading .highlight {
+      color: var(--sd-secondary);
+    }
+
+    .section-recipes__gallery {
+      display: flex;
+      gap: var(--sd-space-3);
+      justify-content: center;
+      overflow-x: auto;
+      padding: var(--sd-space-2) var(--sd-space-3);
+      margin-bottom: var(--sd-space-9);
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .section-recipes__gallery::-webkit-scrollbar { display: none; }
+
+    .section-recipes__thumb {
+      flex: 0 0 auto;
+      width: clamp(132px, 17vw, 196px);
+      aspect-ratio: 3 / 4.2;
+      border-radius: var(--sd-radius-sm);
+      overflow: hidden;
+      background: var(--sd-surface);
+      margin: 0;
+    }
+
+    .section-recipes__thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .section-recipes__cta {
+      display: flex;
+      justify-content: center;
+    }
+
+    .section-recipes__cta .sd-icon {
+      color: var(--sd-secondary);
+    }
+
+    /* ============================================================
+       SEÇÃO — O que você leva + investimento
+       ============================================================ */
+    .section-offer {
+      background: var(--sd-section-white);
+      padding: var(--sd-space-10) 0 var(--sd-space-12);
+    }
+
+    .offer-card {
+      max-width: 620px;
+      margin: 0 auto;
+      background: var(--sd-surface);
+      border-radius: var(--sd-radius-xl);
+      padding: var(--sd-space-8) var(--sd-space-5);
+      box-shadow: var(--sd-shadow-sm);
+    }
+
+    @media (min-width: 640px) {
+      .offer-card {
+        padding: var(--sd-space-9) var(--sd-space-7);
+      }
+    }
+
+    .section-offer__title {
+      font-family: var(--sd-font-body);
+      font-size: clamp(1.375rem, 3.2vw, 1.875rem);
+      font-weight: 700;
+      color: var(--sd-primary);
+      text-align: center;
+      margin: 0 0 var(--sd-space-7);
+      line-height: 1.3;
+    }
+
+    .offer-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 0 0 8px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .offer-list:last-of-type {
+      margin-bottom: var(--sd-space-6);
+    }
+
+    .offer-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: var(--sd-radius-md);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--sd-primary);
+      background: var(--sd-white);
+    }
+
+    .offer-item > i {
+      flex: none;
+      width: 18px;
+      height: 18px;
+      color: var(--sd-primary);
+    }
+
+    .offer-item--bonus {
+      background: var(--sd-secondary);
+      box-shadow: none;
+      color: var(--sd-text-primary);
+      gap: var(--sd-space-3);
+    }
+
+    .offer-item--bonus strong {
+      font-weight: 700;
+    }
+
+    .offer-item__icon {
+      flex: none;
+      width: 26px;
+      height: 26px;
+      background: var(--sd-secondary-dark);
+      border-radius: var(--sd-radius-xs);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sd-white);
+    }
+
+    .offer-item__icon i {
+      width: 14px;
+      height: 14px;
+    }
+
+    .section-offer__pricing {
+      text-align: center;
+      margin: 0 0 var(--sd-space-7);
+    }
+
+    .section-offer__investment {
+      font-size: 0.9375rem;
+      color: var(--sd-text-primary);
+      margin: 0 0 var(--sd-space-2);
+      line-height: 1.5;
+    }
+
+    .section-offer__investment s {
+      color: var(--sd-error);
+      text-decoration: line-through;
+    }
+
+    .section-offer__price {
+      font-family: var(--sd-font-body);
+      font-size: clamp(2.75rem, 11vw, 4.25rem);
+      font-weight: 700;
+      color: var(--sd-primary);
+      margin: 0;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .section-offer__cta {
+      display: flex;
+      justify-content: center;
+    }
+
+    .section-offer__cta .sd-btn--lg {
+      height: 56px;
+      padding: 0 32px;
+      font-size: 0.9375rem;
+    }
+
+    /* ============================================================
+       SEÇÃO — FAQ
+       ============================================================ */
+    .section-faq {
+      position: relative;
+      background: var(--sd-surface);
+      padding: var(--sd-space-12) 0 var(--sd-space-12);
+    }
+
+    .section-faq__divider {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      border-radius: var(--sd-radius-full);
+      background: var(--sd-white);
+      box-shadow: var(--sd-shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sd-primary);
+      z-index: 2;
+      animation: section-divider-top-bob 2s var(--sd-ease) infinite;
+    }
+
+    @keyframes section-divider-top-bob {
+      0%, 100% { transform: translate(-50%, -50%); }
+      50% { transform: translate(-50%, calc(-50% + 6px)); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .section-bonus__divider,
+      .section-faq__divider { animation: none; }
+    }
+
+    .section-faq__heading {
+      font-family: var(--sd-font-body);
+      font-size: clamp(1.5rem, 3.5vw, 2.125rem);
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--sd-text-primary);
+      text-align: center;
+      margin: 0 0 var(--sd-space-8);
+    }
+
+    .section-faq__heading .highlight {
+      color: var(--sd-secondary);
+    }
+
+    .faq-accordion {
+      border: none;
+      background: transparent;
+      overflow: visible;
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sd-space-3);
+    }
+
+    .faq-accordion .sd-accordion__item {
+      border: none;
+      border-radius: var(--sd-radius-full);
+      overflow: hidden;
+      background: var(--sd-primary);
+    }
+
+    .faq-accordion .sd-accordion__item + .sd-accordion__item {
+      border-top: none;
+    }
+
+    .faq-accordion .sd-accordion__trigger {
+      background: transparent;
+      color: var(--sd-white);
+      padding: var(--sd-space-4) var(--sd-space-6);
+      border-radius: var(--sd-radius-full);
+      font-size: var(--sd-fs-body-sm);
+      font-weight: 500;
+      line-height: 1.45;
+    }
+
+    .faq-accordion .sd-accordion__trigger:hover {
+      color: var(--sd-white);
+      background: var(--sd-primary-dark);
+    }
+
+    .faq-accordion .sd-accordion__chevron {
+      color: var(--sd-white);
+      width: 20px;
+      height: 20px;
+      transition: transform var(--sd-dur) var(--sd-ease);
+    }
+
+    .faq-accordion .sd-accordion__trigger[aria-expanded="true"] .sd-accordion__chevron {
+      transform: rotate(45deg);
+    }
+
+    .faq-accordion .sd-accordion__panel {
+      background: var(--sd-white);
+    }
+
+    .faq-accordion .sd-accordion__panel-inner {
+      padding: var(--sd-space-4) var(--sd-space-6) var(--sd-space-5);
+      color: var(--sd-text-secondary);
+      font-size: var(--sd-fs-body-sm);
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       SEÇÃO — CTA final
+       ============================================================ */
+    .section-final-cta {
+      background: var(--sd-section-white);
+      padding: var(--sd-space-12) 0 var(--sd-space-12);
+      text-align: center;
+    }
+
+    .section-final-cta__inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .section-final-cta__heading {
+      font-family: var(--sd-font-body);
+      font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--sd-primary);
+      margin: 0 0 var(--sd-space-6);
+    }
+
+    .section-final-cta__text {
+      font-size: var(--sd-fs-body-sm);
+      color: var(--sd-text-primary);
+      line-height: 1.65;
+      margin: 0 auto var(--sd-space-9);
+      max-width: 640px;
+    }
+
+    .section-final-cta__cta {
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .site-footer {
+      background: var(--sd-primary-dark);
+      color: rgba(255, 255, 255, 0.72);
+      text-align: center;
+      padding: var(--sd-space-6) var(--sd-space-4);
+      font-size: var(--sd-fs-caption);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============ BARRA DE OFERTA ============ -->
+  <div class="announcement">
+    <span class="announcement__inner">
+      <i data-lucide="flame"></i>
+      <span><strong>OFERTA ESPECIAL:</strong> R$ 250,00 de desconto + 5 Bônus Exclusivos!</span>
+    </span>
+  </div>
+
+  <!-- ============ HEADER / HERO ============ -->
+  <header class="header">
+    <div class="ds-container header__grid">
+
+      <!-- Coluna esquerda: logo, dois parágrafos e botão com ícone -->
+      <div class="header__content">
+        <!-- LOGO: substituir o placeholder por <img src="assets/img/logo-santo-doce.svg" alt="Santo Doce" /> -->
+        <a class="header__logo" href="index.html" aria-label="Santo Doce — início">
+          <svg class="header__logo-mark" viewBox="0 0 168 62" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <text x="0" y="28" class="header__logo-text">Santo</text>
+            <text x="62" y="56" class="header__logo-text">Doce</text>
+          </svg>
+        </a>
+
+        <!-- Parágrafo 1 (título) -->
+        <h1 class="header__title">
+          Aprenda a fazer doces <strong>sem glúten, sem lactose e sem açúcar refinado</strong>
+          que ficam mais gostosos do que os tradicionais.
+        </h1>
+
+        <!-- Parágrafo 2 (descrição) -->
+        <p class="header__desc">
+          <strong>Mais de 110 receitas testadas, aprovadas por 1.230 alunas em 30 países</strong>,
+          ensinadas do zero por Bruna Hash, a arquiteta brasileira que construiu uma confeitaria de sucesso
+          na Europa fazendo exatamente isso.
+        </p>
+
+        <!-- Botão com ícone -->
+        <a href="#" class="sd-btn sd-btn--secondary sd-btn--lg header__cta">
+          <i data-lucide="cake" class="sd-icon"></i>
+          Quero entrar no Santo Doce
+        </a>
+      </div>
+
+      <!-- Coluna direita: imagem principal -->
+      <div class="header__media">
+        <img
+          class="header__image"
+          src="assets/img/bruna-santo-doce.png"
+          alt="Bruna Hash saboreando um doce Santo Doce"
+          width="1024"
+          height="1024"
+          loading="eager"
+        />
+      </div>
+    </div>
+
+    <!-- Indicador de rolagem -->
+    <a href="#para-voce" class="header__scroll" aria-label="Rolar para o conteúdo">
+      <i data-lucide="chevron-down" style="width:22px;height:22px;"></i>
+    </a>
+  </header>
+
+  <!-- ============ SEÇÃO: FOI FEITO PARA VOCÊ ============ -->
+  <main id="conteudo">
+    <section class="section-for-you" id="para-voce" aria-labelledby="para-voce-title">
+      <div class="ds-container">
+
+        <header class="section-for-you__header">
+          <h2 class="section-for-you__brand">O Santo Doce</h2>
+          <p class="section-for-you__title" id="para-voce-title">foi feito para você que:</p>
+        </header>
+
+        <div class="section-for-you__grid">
+
+          <article class="for-you-card">
+            <span class="for-you-card__icon" aria-hidden="true">
+              <span class="for-you-card__icon-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </span>
+            <p class="for-you-card__text">Quer oferecer doces melhores para sua família sem culpa e sem abrir mão do sabor.</p>
+          </article>
+
+          <article class="for-you-card">
+            <span class="for-you-card__icon" aria-hidden="true">
+              <span class="for-you-card__icon-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </span>
+            <p class="for-you-card__text">Já tentou receitas saudáveis e tudo ficou seco, sem graça ou não funcionou.</p>
+          </article>
+
+          <article class="for-you-card">
+            <span class="for-you-card__icon" aria-hidden="true">
+              <span class="for-you-card__icon-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </span>
+            <p class="for-you-card__text">Tem intolerância à lactose, glúten ou caseína e sente falta de comer doce de verdade.</p>
+          </article>
+
+          <article class="for-you-card">
+            <span class="for-you-card__icon" aria-hidden="true">
+              <span class="for-you-card__icon-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </span>
+            <p class="for-you-card__text">Ama doce, mas quer uma rotina mais leve e consciente sem restrição extrema.</p>
+          </article>
+
+          <article class="for-you-card">
+            <span class="for-you-card__icon" aria-hidden="true">
+              <span class="for-you-card__icon-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </span>
+            <p class="for-you-card__text">Quer transformar confeitaria saudável em renda com receitas que realmente vendem.</p>
+          </article>
+
+          <article class="for-you-card">
+            <span class="for-you-card__icon" aria-hidden="true">
+              <span class="for-you-card__icon-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+            </span>
+            <p class="for-you-card__text">Nunca fez um bolo, mas quer aprender do zero com segurança e apoio.</p>
+          </article>
+
+        </div>
+
+        <div class="section-for-you__cta">
+          <a href="#" class="sd-btn sd-btn--primary sd-btn--lg">
+            <i data-lucide="cake" class="sd-icon"></i>
+            Quero entrar no Santo Doce
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ SEÇÃO: VEJA COMO É DENTRO ============ -->
+    <section class="section-inside" id="por-dentro" aria-labelledby="por-dentro-title">
+      <div class="ds-container section-inside__inner">
+
+        <header class="section-inside__header">
+          <h2 class="section-inside__heading" id="por-dentro-title">
+            Veja como é<br>
+            dentro do <strong>Santo Doce</strong>
+          </h2>
+          <p class="section-inside__desc">
+            Mais de 200 aulas em vídeo, receitas organizadas por categorias, PDFs completos e acesso por 12 meses para
+            você aprender no seu ritmo, de qualquer lugar do mundo.
+          </p>
+        </header>
+
+        <!-- Placeholders — substituir por imagens/vídeos quando disponíveis -->
+        <div class="section-inside__gallery" aria-label="Prévia do conteúdo do curso">
+          <figure class="section-inside__thumb">
+            <img src="assets/img/receita01.png" alt="Doce de leite artesanal e pães de mel" loading="lazy" />
+          </figure>
+          <figure class="section-inside__thumb">
+            <img src="assets/img/receita02.png" alt="Brigadeiro vegano sem açúcar" loading="lazy" />
+          </figure>
+          <figure class="section-inside__thumb">
+            <img src="assets/img/receita03.png" alt="Geleia de morango caseira" loading="lazy" />
+          </figure>
+          <figure class="section-inside__thumb">
+            <img src="assets/img/receita04.png" alt="Ovo de páscoa de cenoura com chocolate" loading="lazy" />
+          </figure>
+          <figure class="section-inside__thumb">
+            <img src="assets/img/receita05.png" alt="Ovo de colher pão de mel com brigadeiro" loading="lazy" />
+          </figure>
+        </div>
+
+        <div class="section-inside__cta">
+          <a href="#" class="sd-btn sd-btn--primary sd-btn--lg">
+            <i data-lucide="cake" class="sd-icon"></i>
+            Quero entrar no Santo Doce
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Indicador de rolagem (mesmo padrão do header) -->
+      <a href="#proxima-secao" class="section-divider" aria-label="Continuar explorando">
+        <i data-lucide="chevron-down" style="width:22px;height:22px;"></i>
+      </a>
+    </section>
+    <div class="section-inside__tail" aria-hidden="true"></div>
+
+    <!-- ============ SEÇÃO: O QUE VOCÊ VAI DOMINAR ============ -->
+    <section class="section-dominate" id="proxima-secao" aria-labelledby="dominate-title">
+      <div class="ds-container">
+
+        <div class="dominate-compare">
+
+          <article class="dominate-card">
+            <h2 class="dominate-card__title" id="dominate-title">O que você vai dominar<br>dentro do Santo Doce:</h2>
+            <ul class="dominate-card__list">
+              <li><i data-lucide="sparkles"></i> O Santo Leite, a base sem lactose e sem caseína que muda toda receita.</li>
+              <li><i data-lucide="sparkles"></i> Bolos sem glúten fofinhos, úmidos e que não se despedaçam ao cortar.</li>
+              <li><i data-lucide="sparkles"></i> Brigadeiros e recheios sem leite condensado e sem açúcar refinado.</li>
+              <li><i data-lucide="sparkles"></i> Doce de leite, leite condensado e creme de leite vegetais.</li>
+              <li><i data-lucide="sparkles"></i> Substituições inteligentes para adaptar qualquer receita convencional.</li>
+              <li><i data-lucide="sparkles"></i> Técnicas e teoria para você entender o que está fazendo, não apenas copiar.</li>
+            </ul>
+          </article>
+
+          <span class="dominate-compare__badge" aria-hidden="true">
+            <span class="dominate-badge">
+              <span class="dominate-badge__inner">
+                <i data-lucide="arrow-left-right"></i>
+              </span>
+            </span>
+          </span>
+
+          <article class="dominate-card">
+            <h2 class="dominate-card__title">E nunca mais vai<br>passar vontade de:</h2>
+            <ul class="dominate-card__list">
+              <li><i data-lucide="sparkles"></i> Brigadeiro, trufa, ganache e recheio de bolo.</li>
+              <li><i data-lucide="sparkles"></i> Bolo de aniversário completo com recheio e decorações.</li>
+              <li><i data-lucide="sparkles"></i> Tortas, biscoitos e sobremesas rápidas do dia a dia.</li>
+              <li><i data-lucide="sparkles"></i> Ovos de páscoa, paçoca, curau e pé de moça em versão sem glúten e sem leite.</li>
+              <li><i data-lucide="sparkles"></i> Doces para presentear, vender ou congelar para a semana.</li>
+            </ul>
+          </article>
+
+        </div>
+
+        <article class="support-card">
+          <span class="support-card__icon" aria-hidden="true">
+            <span class="dominate-badge">
+              <span class="dominate-badge__inner">
+                <svg class="sd-icon-whatsapp" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </span>
+            </span>
+          </span>
+          <h3 class="support-card__title">Suporte direto comigo, todos os dias.</h3>
+          <p class="support-card__text">
+            Você entra para um grupo exclusivo onde eu mesma respondo suas dúvidas, acompanho
+            suas receitas e te ajudo a dar o próximo passo. Não é equipe, não é robô. Sou eu.
+          </p>
+        </article>
+
+        <div class="section-dominate__cta">
+          <a href="#" class="sd-btn sd-btn--primary sd-btn--lg">
+            <i data-lucide="cake" class="sd-icon"></i>
+            Quero entrar no Santo Doce
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ SEÇÃO: DEPOIMENTOS ============ -->
+    <section class="section-testimonials" id="depoimentos" aria-labelledby="depoimentos-title">
+      <div class="ds-container">
+
+        <header class="section-testimonials__header">
+          <h2 class="section-testimonials__heading" id="depoimentos-title">
+            O que as<br>
+            <strong>alunas estão dizendo.</strong>
+          </h2>
+        </header>
+
+        <!-- Placeholders — substituir por vídeos ou imagens de depoimentos -->
+        <div class="section-testimonials__gallery" aria-label="Depoimentos das alunas">
+          <figure class="section-testimonials__thumb">
+            <img src="assets/img/depoimento01.png" alt="Depoimento — bolo de aniversário feito com receita do curso" loading="lazy" />
+          </figure>
+          <figure class="section-testimonials__thumb">
+            <img src="assets/img/depoimento02.png" alt="Depoimento — bolo de cenoura feito após a live" loading="lazy" />
+          </figure>
+          <figure class="section-testimonials__thumb">
+            <img src="assets/img/depoimento03.png" alt="Depoimento — brownie elogiado pelas alunas" loading="lazy" />
+          </figure>
+          <figure class="section-testimonials__thumb">
+            <img src="assets/img/depoimento04.png" alt="Depoimento — bolo pão de mel com brigadeiro vegano" loading="lazy" />
+          </figure>
+          <figure class="section-testimonials__thumb">
+            <img src="assets/img/depoimento05.png" alt="Depoimento — cheesecake feito com receita do curso" loading="lazy" />
+          </figure>
+        </div>
+
+        <div class="section-testimonials__cta">
+          <a href="#" class="sd-btn sd-btn--primary sd-btn--lg">
+            <i data-lucide="cake" class="sd-icon"></i>
+            Quero entrar no Santo Doce
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ SEÇÃO: BÔNUS ============ -->
+    <section class="section-bonus" id="bonus" aria-labelledby="bonus-title">
+      <span class="section-bonus__divider" aria-hidden="true">
+        <i data-lucide="chevron-down" style="width:22px;height:22px;"></i>
+      </span>
+
+      <div class="ds-container">
+
+        <header class="section-bonus__header">
+          <h2 class="section-bonus__heading" id="bonus-title">
+            Entrando hoje, você ainda<br>
+            <strong>recebe todos esses bônus:</strong>
+          </h2>
+        </header>
+
+        <div class="bonus-grid">
+
+          <article class="bonus-card">
+            <div class="bonus-card__icon" aria-hidden="true"><i data-lucide="gift"></i></div>
+            <h3 class="bonus-card__title">Páscoa Lucrativa:</h3>
+            <p class="bonus-card__text">Receitas de ovos sem lactose e sem açúcar que foram campeões de vendas.</p>
+          </article>
+
+          <article class="bonus-card">
+            <div class="bonus-card__icon" aria-hidden="true"><i data-lucide="gift"></i></div>
+            <h3 class="bonus-card__title">Chef Emanuel Savio:</h3>
+            <p class="bonus-card__text">Pratos autorais criados para o Santo Doce por um chef de reality show.</p>
+          </article>
+
+          <article class="bonus-card">
+            <div class="bonus-card__icon" aria-hidden="true"><i data-lucide="gift"></i></div>
+            <h3 class="bonus-card__title">Treino em Casa:</h3>
+            <p class="bonus-card__text">Um mês de exercícios com Francisco Gabineski para aliar saúde e movimento.</p>
+          </article>
+
+          <article class="bonus-card">
+            <div class="bonus-card__icon" aria-hidden="true"><i data-lucide="gift"></i></div>
+            <h3 class="bonus-card__title">Doces Juninos:</h3>
+            <p class="bonus-card__text">Receitas típicas sem leite, sem glúten, sem açúcar, mais gostosas que originais.</p>
+          </article>
+
+          <article class="bonus-card">
+            <div class="bonus-card__icon" aria-hidden="true"><i data-lucide="gift"></i></div>
+            <h3 class="bonus-card__title">Empreendedorismo:</h3>
+            <p class="bonus-card__text">Aulas para estruturar sua marca, bombar nas redes e converter clientes.</p>
+          </article>
+
+        </div>
+
+        <div class="section-bonus__cta">
+          <a href="#" class="sd-btn sd-btn--primary sd-btn--lg">
+            <i data-lucide="cake" class="sd-icon"></i>
+            Quero entrar no Santo Doce
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ SEÇÃO: 110+ RECEITAS ============ -->
+    <section class="section-recipes" id="receitas" aria-labelledby="receitas-title">
+      <div class="ds-container">
+
+        <header class="section-recipes__header">
+          <h2 class="section-recipes__heading" id="receitas-title">
+            <span class="highlight">Mais de 110 receitas</span><br>
+            para você nunca mais ficar sem ideia.
+          </h2>
+        </header>
+
+        <!-- Placeholders — substituir por capas ou imagens das receitas -->
+        <div class="section-recipes__gallery" aria-label="Galeria de receitas">
+          <figure class="section-recipes__thumb">
+            <img src="assets/img/produto01.png" alt="Bolo de chocolate em camadas com cobertura de brigadeiro" loading="lazy" />
+          </figure>
+          <figure class="section-recipes__thumb">
+            <img src="assets/img/produto02.png" alt="Bolo de especiarias com cobertura de canela" loading="lazy" />
+          </figure>
+          <figure class="section-recipes__thumb">
+            <img src="assets/img/produto03.png" alt="Bolo de limão com cobertura branca e raspas cítricas" loading="lazy" />
+          </figure>
+          <figure class="section-recipes__thumb">
+            <img src="assets/img/produto04.png" alt="Bolo pão de mel com chocolate e barrinhas recheadas" loading="lazy" />
+          </figure>
+          <figure class="section-recipes__thumb">
+            <img src="assets/img/produto05.png" alt="Bolo de cenoura com cobertura de brigadeiro" loading="lazy" />
+          </figure>
+        </div>
+
+        <div class="section-recipes__cta">
+          <a href="#" class="sd-btn sd-btn--secondary sd-btn--lg">
+            <i data-lucide="cake" class="sd-icon"></i>
+            Quero entrar no Santo Doce
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ SEÇÃO: OFERTA / INVESTIMENTO ============ -->
+    <section class="section-offer" id="oferta" aria-labelledby="oferta-title">
+      <div class="ds-container">
+
+        <div class="offer-card">
+
+          <h2 class="section-offer__title" id="oferta-title">O que você leva<br>entrando hoje:</h2>
+
+          <ul class="offer-list" aria-label="Itens inclusos">
+            <li class="offer-item">
+              <i data-lucide="check"></i>
+              Mais de 200 aulas em vídeo com acesso por 12 meses.
+            </li>
+            <li class="offer-item">
+              <i data-lucide="check"></i>
+              Mais de 110 receitas exclusivas com fichas em PDF.
+            </li>
+            <li class="offer-item">
+              <i data-lucide="check"></i>
+              Acesso à comunidade VIP com suporte direto comigo.
+            </li>
+            <li class="offer-item">
+              <i data-lucide="check"></i>
+              Módulo inédito e completo com uma nutricionista
+            </li>
+            <li class="offer-item">
+              <i data-lucide="check"></i>
+              Módulo de negócios e empreendedorismo de sucesso.
+            </li>
+          </ul>
+
+          <ul class="offer-list" aria-label="Bônus inclusos">
+            <li class="offer-item offer-item--bonus">
+              <span class="offer-item__icon" aria-hidden="true"><i data-lucide="gift"></i></span>
+              <strong>Bônus:</strong> Páscoa Lucrativa com receitas campeãs dela.
+            </li>
+            <li class="offer-item offer-item--bonus">
+              <span class="offer-item__icon" aria-hidden="true"><i data-lucide="gift"></i></span>
+              <strong>Bônus:</strong> Módulo prático com o Chef Emanuel Savio.
+            </li>
+            <li class="offer-item offer-item--bonus">
+              <span class="offer-item__icon" aria-hidden="true"><i data-lucide="gift"></i></span>
+              <strong>Bônus:</strong> Módulo com o Personal Francisco Gabineski.
+            </li>
+            <li class="offer-item offer-item--bonus">
+              <span class="offer-item__icon" aria-hidden="true"><i data-lucide="gift"></i></span>
+              <strong>Bônus:</strong> Curso completo focado em Doces Juninos
+            </li>
+          </ul>
+
+          <div class="section-offer__pricing">
+            <p class="section-offer__investment">
+              Investimento: De <s>R$ 837,00</s> por apenas 12X de
+            </p>
+            <p class="section-offer__price">R$&nbsp;60,50</p>
+          </div>
+
+          <div class="section-offer__cta">
+            <a href="#" class="sd-btn sd-btn--primary sd-btn--lg">
+              <i data-lucide="cake" class="sd-icon"></i>
+              Quero entrar no Santo Doce
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ SEÇÃO: FAQ ============ -->
+    <section class="section-faq" id="faq" aria-labelledby="faq-title">
+      <span class="section-faq__divider" aria-hidden="true">
+        <i data-lucide="chevron-down" style="width:22px;height:22px;"></i>
+      </span>
+
+      <div class="ds-container">
+
+        <h2 class="section-faq__heading" id="faq-title">
+          Ficou <span class="highlight">alguma dúvida?</span>
+        </h2>
+
+        <div class="sd-accordion faq-accordion" data-accordion="single">
+
+          <div class="sd-accordion__item">
+            <button class="sd-accordion__trigger" aria-expanded="false" aria-controls="faq-sd-1">
+              Não tenho experiência na cozinha. Consigo acompanhar?
+              <i data-lucide="plus" class="sd-accordion__chevron"></i>
+            </button>
+            <div id="faq-sd-1" class="sd-accordion__panel" role="region">
+              <div class="sd-accordion__panel-inner">Sim. As aulas começam do zero, com técnica e teoria, para você entender cada passo — não apenas copiar.</div>
+            </div>
+          </div>
+
+          <div class="sd-accordion__item">
+            <button class="sd-accordion__trigger" aria-expanded="false" aria-controls="faq-sd-2">
+              As receitas funcionam mesmo?
+              <i data-lucide="plus" class="sd-accordion__chevron"></i>
+            </button>
+            <div id="faq-sd-2" class="sd-accordion__panel" role="region">
+              <div class="sd-accordion__panel-inner">Mais de 110 receitas testadas e aprovadas por 1.230 alunas em 30 países.</div>
+            </div>
+          </div>
+
+          <div class="sd-accordion__item">
+            <button class="sd-accordion__trigger" aria-expanded="false" aria-controls="faq-sd-3">
+              Moro fora do Brasil, consigo encontrar os ingredientes?
+              <i data-lucide="plus" class="sd-accordion__chevron"></i>
+            </button>
+            <div id="faq-sd-3" class="sd-accordion__panel" role="region">
+              <div class="sd-accordion__panel-inner">Sim. As receitas foram pensadas com substituições inteligentes para ingredientes encontrados em mercados internacionais.</div>
+            </div>
+          </div>
+
+          <div class="sd-accordion__item">
+            <button class="sd-accordion__trigger" aria-expanded="false" aria-controls="faq-sd-4">
+              Preciso de ingredientes difíceis ou caros?
+              <i data-lucide="plus" class="sd-accordion__chevron"></i>
+            </button>
+            <div id="faq-sd-4" class="sd-accordion__panel" role="region">
+              <div class="sd-accordion__panel-inner">Não. Priorizamos substituições inteligentes com ingredientes acessíveis onde você estiver.</div>
+            </div>
+          </div>
+
+          <div class="sd-accordion__item">
+            <button class="sd-accordion__trigger" aria-expanded="false" aria-controls="faq-sd-5">
+              Os doces servem para APLV, celíacos e intolerantes a lactose ao mesmo tempo?
+              <i data-lucide="plus" class="sd-accordion__chevron"></i>
+            </button>
+            <div id="faq-sd-5" class="sd-accordion__panel" role="region">
+              <div class="sd-accordion__panel-inner">Sim. Todas as receitas são sem glúten, sem lactose e sem açúcar refinado — adequadas para quem tem restrições alimentares.</div>
+            </div>
+          </div>
+
+          <div class="sd-accordion__item">
+            <button class="sd-accordion__trigger" aria-expanded="false" aria-controls="faq-sd-6">
+              Como funciona o acesso?
+              <i data-lucide="plus" class="sd-accordion__chevron"></i>
+            </button>
+            <div id="faq-sd-6" class="sd-accordion__panel" role="region">
+              <div class="sd-accordion__panel-inner">Após a confirmação do pagamento, você recebe login e senha por e-mail com acesso imediato à plataforma por 12 meses.</div>
+            </div>
+          </div>
+
+          <div class="sd-accordion__item">
+            <button class="sd-accordion__trigger" aria-expanded="false" aria-controls="faq-sd-7">
+              Quais as formas de pagamento?
+              <i data-lucide="plus" class="sd-accordion__chevron"></i>
+            </button>
+            <div id="faq-sd-7" class="sd-accordion__panel" role="region">
+              <div class="sd-accordion__panel-inner">Cartão de crédito (parcelado em até 12x), PIX e boleto bancário.</div>
+            </div>
+          </div>
+
+          <div class="sd-accordion__item">
+            <button class="sd-accordion__trigger" aria-expanded="false" aria-controls="faq-sd-8">
+              Posso usar as receitas para vender?
+              <i data-lucide="plus" class="sd-accordion__chevron"></i>
+            </button>
+            <div id="faq-sd-8" class="sd-accordion__panel" role="region">
+              <div class="sd-accordion__panel-inner">Sim! O curso inclui um módulo completo de negócios e empreendedorismo para você monetizar seus doces.</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ SEÇÃO: CTA FINAL ============ -->
+    <section class="section-final-cta" id="cta-final" aria-labelledby="cta-final-title">
+      <div class="ds-container">
+        <div class="section-final-cta__inner">
+
+          <h2 class="section-final-cta__heading" id="cta-final-title">
+            A vida saudável que você<br>
+            sempre quis está esperando você.
+          </h2>
+
+          <p class="section-final-cta__text">
+            <strong>Mais de 1.230 alunos em 30 países já descobriram que dá para comer doce todos os dias sem culpa</strong>,
+            sem porcaria e sem abrir mão do que importa. Sua vez é agora.
+          </p>
+
+          <div class="section-final-cta__cta">
+            <a href="#" class="sd-btn sd-btn--primary sd-btn--lg">
+              <i data-lucide="cake" class="sd-icon"></i>
+              Quero entrar no Santo Doce
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 · Santo Doce · Todos os direitos reservados</p>
+  </footer>
+
+  <script src="assets/js/design-system.js"></script>
+</body>
+</html>
