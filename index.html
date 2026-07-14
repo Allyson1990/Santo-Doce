@@ -124,15 +124,8 @@
     .header__logo { display: inline-flex; width: fit-content; text-decoration: none; }
     .header__logo-mark {
       display: block;
-      height: clamp(64px, 10vw, 80px);
+      height: clamp(64px, 10vw, 88px);
       width: auto;
-    }
-    .header__logo-text {
-      fill: var(--sd-primary);
-      font-family: "Fredoka", sans-serif;
-      font-size: 38px;
-      font-weight: 700;
-      letter-spacing: -0.03em;
     }
 
     .header__title {
@@ -980,26 +973,21 @@
       margin: 0 0 var(--sd-space-7);
     }
 
-    .section-offer__investment {
-      font-size: 0.9375rem;
-      color: var(--sd-text-primary);
-      margin: 0 0 var(--sd-space-2);
-      line-height: 1.5;
-    }
-
-    .section-offer__investment s {
-      color: var(--sd-error);
-      text-decoration: line-through;
-    }
-
     .section-offer__price {
       font-family: var(--sd-font-body);
       font-size: clamp(2.75rem, 11vw, 4.25rem);
       font-weight: 700;
       color: var(--sd-primary);
-      margin: 0;
+      margin: 0 0 var(--sd-space-2);
       line-height: 1;
       letter-spacing: -0.02em;
+    }
+
+    .section-offer__investment {
+      font-size: 0.9375rem;
+      color: var(--sd-text-primary);
+      margin: 0;
+      line-height: 1.5;
     }
 
     .section-offer__cta {
@@ -1189,12 +1177,15 @@
 
       <!-- Coluna esquerda: logo, dois parágrafos e botão com ícone -->
       <div class="header__content">
-        <!-- LOGO: substituir o placeholder por <img src="assets/img/logo-santo-doce.svg" alt="Santo Doce" /> -->
+        <!-- LOGO principal (wordmark empilhado) -->
         <a class="header__logo" href="index.html" aria-label="Santo Doce — início">
-          <svg class="header__logo-mark" viewBox="0 0 168 62" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <text x="0" y="28" class="header__logo-text">Santo</text>
-            <text x="62" y="56" class="header__logo-text">Doce</text>
-          </svg>
+          <img
+            class="header__logo-mark"
+            src="assets/img/logos/principal/principal-verde-medio.png"
+            alt="Santo Doce"
+            width="200"
+            height="93"
+          />
         </a>
 
         <!-- Parágrafo 1 (título) -->
@@ -1206,12 +1197,11 @@
         <!-- Parágrafo 2 (descrição) -->
         <p class="header__desc">
           <strong>Mais de 100 receitas testadas por Bru Hash e aprovadas por mais de 1 mil alunas em quase 30 países</strong>,
-          ensinadas do zero por Bruna Hash, a arquiteta brasileira que construiu uma confeitaria de sucesso
-          na Europa fazendo exatamente isso.
+          ensinadas em aulas em vídeo, ministradas por Bru Hash.
         </p>
 
         <!-- Botão com ícone -->
-        <a href="#" class="sd-btn sd-btn--secondary sd-btn--lg header__cta">
+        <a href="#oferta" class="sd-btn sd-btn--secondary sd-btn--lg header__cta">
           <i data-lucide="cake" class="sd-icon"></i>
           Quero entrar no Santo Doce
         </a>
@@ -1305,7 +1295,7 @@
         </div>
 
         <div class="section-for-you__cta">
-          <a href="#" class="sd-btn sd-btn--primary sd-btn--lg">
+          <a href="#oferta" class="sd-btn sd-btn--primary sd-btn--lg">
             <i data-lucide="cake" class="sd-icon"></i>
             Quero entrar no Santo Doce
           </a>
@@ -1349,7 +1339,7 @@
         </div>
 
         <div class="section-inside__cta">
-          <a href="#" class="sd-btn sd-btn--primary sd-btn--lg">
+          <a href="#oferta" class="sd-btn sd-btn--primary sd-btn--lg">
             <i data-lucide="cake" class="sd-icon"></i>
             Quero entrar no Santo Doce
           </a>
@@ -1419,7 +1409,7 @@
         </article>
 
         <div class="section-dominate__cta">
-          <a href="#" class="sd-btn sd-btn--primary sd-btn--lg">
+          <a href="#oferta" class="sd-btn sd-btn--primary sd-btn--lg">
             <i data-lucide="cake" class="sd-icon"></i>
             Quero entrar no Santo Doce
           </a>
@@ -1459,7 +1449,7 @@
         </div>
 
         <div class="section-testimonials__cta">
-          <a href="#" class="sd-btn sd-btn--primary sd-btn--lg">
+          <a href="#oferta" class="sd-btn sd-btn--primary sd-btn--lg">
             <i data-lucide="cake" class="sd-icon"></i>
             Quero entrar no Santo Doce
           </a>
@@ -1518,7 +1508,7 @@
         </div>
 
         <div class="section-bonus__cta">
-          <a href="#" class="sd-btn sd-btn--primary sd-btn--lg">
+          <a href="#oferta" class="sd-btn sd-btn--primary sd-btn--lg">
             <i data-lucide="cake" class="sd-icon"></i>
             Quero entrar no Santo Doce
           </a>
@@ -1558,7 +1548,7 @@
         </div>
 
         <div class="section-recipes__cta">
-          <a href="#" class="sd-btn sd-btn--secondary sd-btn--lg">
+          <a href="#oferta" class="sd-btn sd-btn--secondary sd-btn--lg">
             <i data-lucide="cake" class="sd-icon"></i>
             Quero entrar no Santo Doce
           </a>
@@ -1618,14 +1608,12 @@
           </ul>
 
           <div class="section-offer__pricing">
-            <p class="section-offer__investment">
-              Investimento: De <s>R$ 837,00</s> por apenas 12X de
-            </p>
-            <p class="section-offer__price">R$&nbsp;60,50</p>
+            <p class="section-offer__price">12 x de R$&nbsp;45,20</p>
+            <p class="section-offer__investment">Ou R$ 437,00 à vista</p>
           </div>
 
           <div class="section-offer__cta">
-            <a href="#" class="sd-btn sd-btn--primary sd-btn--lg">
+            <a href="https://pay.hotmart.com/I87819319C?off=um97imv1&checkoutMode=10&bid=1783988161511" class="sd-btn sd-btn--primary sd-btn--lg" target="_blank" rel="noopener noreferrer">
               <i data-lucide="cake" class="sd-icon"></i>
               Quero entrar no Santo Doce
             </a>
@@ -1750,7 +1738,7 @@
           </p>
 
           <div class="section-final-cta__cta">
-            <a href="#" class="sd-btn sd-btn--primary sd-btn--lg">
+            <a href="#oferta" class="sd-btn sd-btn--primary sd-btn--lg">
               <i data-lucide="cake" class="sd-icon"></i>
               Quero entrar no Santo Doce
             </a>
