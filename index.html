@@ -813,7 +813,7 @@
        ============================================================ */
     .section-recipes {
       background: var(--sd-section-white);
-      padding: var(--sd-space-10) 0 var(--sd-space-12);
+      padding: var(--sd-space-10) 0 var(--sd-space-8);
     }
 
     .section-recipes__header {
@@ -879,7 +879,7 @@
        ============================================================ */
     .section-offer {
       background: var(--sd-section-white);
-      padding: var(--sd-space-10) 0 var(--sd-space-12);
+      padding: var(--sd-space-7) 0 var(--sd-space-12);
     }
 
     .offer-card {
@@ -973,6 +973,18 @@
       margin: 0 0 var(--sd-space-7);
     }
 
+    .section-offer__investment {
+      font-size: 0.9375rem;
+      color: var(--sd-text-primary);
+      margin: 0 0 var(--sd-space-2);
+      line-height: 1.5;
+    }
+
+    .section-offer__investment s {
+      color: var(--sd-error);
+      text-decoration: line-through;
+    }
+
     .section-offer__price {
       font-family: var(--sd-font-body);
       font-size: clamp(2.75rem, 11vw, 4.25rem);
@@ -983,7 +995,7 @@
       letter-spacing: -0.02em;
     }
 
-    .section-offer__investment {
+    .section-offer__cash {
       font-size: 0.9375rem;
       color: var(--sd-text-primary);
       margin: 0;
@@ -1167,7 +1179,7 @@
   <div class="announcement">
     <span class="announcement__inner">
       <i data-lucide="flame"></i>
-      <span><strong>OFERTA ESPECIAL:</strong> R$ 300,00 reais de desconto + 4 Bonus Exclusivos!</span>
+      <span><strong>OFERTA ESPECIAL:</strong> R$ 400,00 reais de desconto + 4 Bonus Exclusivos!</span>
     </span>
   </div>
 
@@ -1608,8 +1620,9 @@
           </ul>
 
           <div class="section-offer__pricing">
+            <p class="section-offer__investment">Investimento de <s>R$ 837,00</s></p>
             <p class="section-offer__price">12 x de R$&nbsp;45,20</p>
-            <p class="section-offer__investment">Ou R$ 437,00 à vista</p>
+            <p class="section-offer__cash">ou R$ 437,00 à vista</p>
           </div>
 
           <div class="section-offer__cta">
