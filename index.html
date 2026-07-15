@@ -37,6 +37,10 @@
       --sd-header-bg: #F3E6DC;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       background: var(--sd-section-white);
     }
@@ -120,8 +124,13 @@
       padding-bottom: 72px;
     }
 
-    /* Logo — wordmark Santo Doce */
-    .header__logo { display: inline-flex; width: fit-content; text-decoration: none; }
+    /* Logo — wordmark Santo Doce (centralizado no mobile) */
+    .header__logo {
+      display: inline-flex;
+      width: fit-content;
+      text-decoration: none;
+      align-self: center;
+    }
     .header__logo-mark {
       display: block;
       height: clamp(64px, 10vw, 88px);
@@ -222,6 +231,10 @@
       .header__content {
         align-self: center;
         padding-bottom: 80px;
+      }
+
+      .header__logo {
+        align-self: flex-start;
       }
 
       .header__media {
@@ -889,11 +902,41 @@
       border-radius: var(--sd-radius-xl);
       padding: var(--sd-space-8) var(--sd-space-5);
       box-shadow: var(--sd-shadow-sm);
+      scroll-margin-top: 24px;
     }
 
-    @media (min-width: 640px) {
+    /* Mobile: card mais compacto e âncora colada ao topo (como no print) */
+    @media (max-width: 767px) {
+      .section-offer {
+        padding: var(--sd-space-5) 0 var(--sd-space-10);
+      }
+
+      .offer-card {
+        padding: var(--sd-space-6) var(--sd-space-4);
+        scroll-margin-top: 8px;
+      }
+
+      .section-offer__title {
+        margin-bottom: var(--sd-space-5);
+      }
+
+      .offer-list:last-of-type {
+        margin-bottom: var(--sd-space-5);
+      }
+
+      .section-offer__pricing {
+        margin-bottom: var(--sd-space-5);
+      }
+
+      .section-offer__price {
+        font-size: clamp(2.25rem, 10vw, 2.75rem);
+      }
+    }
+
+    @media (min-width: 768px) {
       .offer-card {
         padding: var(--sd-space-9) var(--sd-space-7);
+        scroll-margin-top: 24px;
       }
     }
 
@@ -1121,6 +1164,29 @@
       color: var(--sd-text-secondary);
       font-size: var(--sd-fs-body-sm);
       line-height: 1.6;
+    }
+
+    /* Mobile: evita corte do texto nas bordas ovais do accordion */
+    @media (max-width: 767px) {
+      .faq-accordion .sd-accordion__item {
+        border-radius: var(--sd-radius-xl);
+      }
+
+      .faq-accordion .sd-accordion__trigger {
+        padding: 18px 28px;
+        border-radius: var(--sd-radius-xl);
+        gap: 12px;
+      }
+
+      .faq-accordion .sd-accordion__chevron {
+        width: 18px;
+        height: 18px;
+        margin-right: 2px;
+      }
+
+      .faq-accordion .sd-accordion__panel-inner {
+        padding: 8px 28px 28px;
+      }
     }
 
     /* ============================================================
@@ -1570,10 +1636,10 @@
     </section>
 
     <!-- ============ SEÇÃO: OFERTA / INVESTIMENTO ============ -->
-    <section class="section-offer" id="oferta" aria-labelledby="oferta-title">
+    <section class="section-offer" aria-labelledby="oferta-title">
       <div class="ds-container">
 
-        <div class="offer-card">
+        <div class="offer-card" id="oferta">
 
           <h2 class="section-offer__title" id="oferta-title">O que você leva<br>entrando hoje:</h2>
 
@@ -1667,7 +1733,7 @@
               <i data-lucide="plus" class="sd-accordion__chevron"></i>
             </button>
             <div id="faq-sd-2" class="sd-accordion__panel" role="region">
-              <div class="sd-accordion__panel-inner">Mais de 100 receitas testadas e aprovadas por mil e mais de 1 mil alunas em quase 30 países.</div>
+              <div class="sd-accordion__panel-inner">Mais de 100 receitas testadas e aprovadas por mais de 1 mil alunas em quase 30 países.</div>
             </div>
           </div>
 
@@ -1767,5 +1833,35 @@
   </footer>
 
   <script src="assets/js/design-system.js"></script>
+  <script>
+    (function () {
+      var oferta = document.getElementById("oferta");
+      if (!oferta) return;
+
+      function ofertaOffset() {
+        return window.matchMedia("(max-width: 767px)").matches ? 8 : 24;
+      }
+
+      function scrollToOferta(behavior) {
+        var top = oferta.getBoundingClientRect().top + window.pageYOffset - ofertaOffset();
+        window.scrollTo({ top: Math.max(0, top), behavior: behavior || "smooth" });
+      }
+
+      document.querySelectorAll('a[href="#oferta"]').forEach(function (link) {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          scrollToOferta("smooth");
+          if (history.pushState) history.pushState(null, "", "#oferta");
+          else location.hash = "oferta";
+        });
+      });
+
+      if (location.hash === "#oferta") {
+        window.addEventListener("load", function () {
+          requestAnimationFrame(function () { scrollToOferta("auto"); });
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
