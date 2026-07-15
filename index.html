@@ -878,6 +878,135 @@
       display: block;
     }
 
+    .section-recipes__list-heading {
+      font-family: var(--sd-font-body);
+      font-size: clamp(1.25rem, 2.8vw, 1.75rem);
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--sd-text-primary);
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto var(--sd-space-6);
+    }
+
+    .recipes-cards {
+      list-style: none;
+      margin: 0 auto var(--sd-space-5);
+      padding: var(--sd-space-2) 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--sd-space-4);
+      max-width: 1040px;
+    }
+
+    @media (min-width: 768px) {
+      .recipes-cards {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--sd-space-5);
+      }
+    }
+
+    .recipes-card {
+      background: var(--sd-surface);
+      border-radius: var(--sd-radius-md);
+      padding: var(--sd-space-5) var(--sd-space-4);
+      transition: transform var(--sd-dur) var(--sd-ease), box-shadow var(--sd-dur) var(--sd-ease);
+    }
+
+    .recipes-card:hover {
+      transform: scale(1.04);
+      box-shadow: var(--sd-shadow-md);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .recipes-card {
+        transition: none;
+      }
+
+      .recipes-card:hover {
+        transform: none;
+        box-shadow: none;
+      }
+    }
+
+    .recipes-card__heading {
+      display: flex;
+      align-items: center;
+      gap: var(--sd-space-3);
+      margin: 0 0 var(--sd-space-3);
+    }
+
+    .recipes-card__icon {
+      width: 40px;
+      height: 40px;
+      flex: none;
+      background: var(--sd-secondary);
+      border-radius: var(--sd-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sd-white);
+    }
+
+    .recipes-card__icon i,
+    .recipes-card__svg {
+      width: 20px;
+      height: 20px;
+      flex: none;
+    }
+
+    .recipes-card__svg--whisk {
+      width: 28px;
+      height: 28px;
+    }
+
+    .recipes-card__title {
+      font-family: var(--sd-font-body);
+      font-size: 1.0625rem;
+      font-weight: 700;
+      color: var(--sd-primary);
+      text-align: left;
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    .recipes-card__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .recipes-card__list li {
+      position: relative;
+      padding-left: 14px;
+      font-size: 0.9375rem;
+      line-height: 1.4;
+      color: var(--sd-text-secondary);
+    }
+
+    .recipes-card__list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 5px;
+      height: 5px;
+      border-radius: var(--sd-radius-full);
+      background: var(--sd-secondary);
+    }
+
+    .section-recipes__more {
+      font-family: var(--sd-font-body);
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-weight: 700;
+      color: var(--sd-secondary-dark);
+      text-align: center;
+      margin: 0 0 var(--sd-space-6);
+    }
+
     .section-recipes__cta {
       display: flex;
       justify-content: center;
@@ -885,6 +1014,11 @@
 
     .section-recipes__cta .sd-icon {
       color: var(--sd-secondary);
+    }
+
+    .section-recipes-catalog {
+      background: var(--sd-section-white);
+      padding: var(--sd-space-6) 0 var(--sd-space-10);
     }
 
     /* ============================================================
@@ -1120,7 +1254,7 @@
 
     .faq-accordion .sd-accordion__item {
       border: none;
-      border-radius: var(--sd-radius-full);
+      border-radius: var(--sd-radius-xl);
       overflow: hidden;
       background: var(--sd-primary);
     }
@@ -1132,11 +1266,13 @@
     .faq-accordion .sd-accordion__trigger {
       background: transparent;
       color: var(--sd-white);
-      padding: var(--sd-space-4) var(--sd-space-6);
-      border-radius: var(--sd-radius-full);
+      padding: 24px 28px;
+      border-radius: var(--sd-radius-xl);
       font-size: var(--sd-fs-body-sm);
       font-weight: 500;
       line-height: 1.45;
+      gap: 12px;
+      align-items: flex-start;
     }
 
     .faq-accordion .sd-accordion__trigger:hover {
@@ -1144,48 +1280,44 @@
       background: var(--sd-primary-dark);
     }
 
+    .faq-accordion .sd-accordion__trigger[aria-expanded="true"] {
+      border-radius: var(--sd-radius-xl) var(--sd-radius-xl) 0 0;
+      background: var(--sd-primary);
+    }
+
+    .faq-accordion .sd-accordion__trigger[aria-expanded="true"]:hover {
+      background: var(--sd-primary);
+    }
+
     .faq-accordion .sd-accordion__chevron {
       color: var(--sd-white);
       width: 20px;
       height: 20px;
-      transition: transform var(--sd-dur) var(--sd-ease);
+      flex: none;
+      margin-top: 2px;
+      transition: none;
     }
 
     .faq-accordion .sd-accordion__trigger[aria-expanded="true"] .sd-accordion__chevron {
-      transform: rotate(45deg);
+      transform: rotate(45deg); /* + vira × */
     }
 
     .faq-accordion .sd-accordion__panel {
       background: var(--sd-white);
+      transition: none;
     }
 
     .faq-accordion .sd-accordion__panel-inner {
-      padding: var(--sd-space-4) var(--sd-space-6) var(--sd-space-5);
+      padding: 8px 28px 28px;
       color: var(--sd-text-secondary);
       font-size: var(--sd-fs-body-sm);
       line-height: 1.6;
     }
 
-    /* Mobile: evita corte do texto nas bordas ovais do accordion */
     @media (max-width: 767px) {
-      .faq-accordion .sd-accordion__item {
-        border-radius: var(--sd-radius-xl);
-      }
-
-      .faq-accordion .sd-accordion__trigger {
-        padding: 18px 28px;
-        border-radius: var(--sd-radius-xl);
-        gap: 12px;
-      }
-
       .faq-accordion .sd-accordion__chevron {
         width: 18px;
         height: 18px;
-        margin-right: 2px;
-      }
-
-      .faq-accordion .sd-accordion__panel-inner {
-        padding: 8px 28px 28px;
       }
     }
 
@@ -1574,7 +1706,7 @@
           <article class="bonus-card">
             <div class="bonus-card__icon" aria-hidden="true"><i data-lucide="gift"></i></div>
             <h3 class="bonus-card__title">Doces Juninos:</h3>
-            <p class="bonus-card__text">Receitas típicas sem leite, sem glúten, sem açúcar, mais gostosas que originais.</p>
+            <p class="bonus-card__text">Receitas típicas sem leite, sem glúten, sem açúcar refinado, mais gostosas que originais.</p>
           </article>
 
           <article class="bonus-card">
@@ -1685,7 +1817,7 @@
             </li>
           </ul>
 
-          <div class="section-offer__pricing">
+          <div class="section-offer__pricing" id="oferta-pricing">
             <p class="section-offer__investment">Investimento de <s>R$ 837,00</s></p>
             <p class="section-offer__price">12 x de R$&nbsp;45,20</p>
             <p class="section-offer__cash">ou R$ 437,00 à vista</p>
@@ -1699,6 +1831,100 @@
           </div>
 
         </div>
+
+      </div>
+    </section>
+
+    <!-- ============ SEÇÃO: LISTA DE RECEITAS ============ -->
+    <section class="section-recipes-catalog" id="receitas-lista" aria-labelledby="receitas-lista-title">
+      <div class="ds-container">
+
+        <h3 class="section-recipes__list-heading" id="receitas-lista-title">
+          Algumas receitas que você vai encontrar no Santo Doce
+        </h3>
+
+        <div class="recipes-cards" aria-label="Lista de receitas">
+
+          <article class="recipes-card">
+            <div class="recipes-card__heading">
+              <div class="recipes-card__icon" aria-hidden="true">
+                <svg class="recipes-card__svg recipes-card__svg--whisk" xmlns="http://www.w3.org/2000/svg" viewBox="1 0 23 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 2 3.45 20.55" />
+                  <path d="M3.5 13.5a5 5 0 1 0 7.1 7.1C12.6 18.6 15 9 15 9s-9.6 2.5-11.5 4.5" />
+                </svg>
+              </div>
+              <h4 class="recipes-card__title">Bases, recheios e coberturas</h4>
+            </div>
+            <ul class="recipes-card__list">
+              <li>Creme de leite vegano</li>
+              <li>Leite condensado sem leite</li>
+              <li>Leite vegetal</li>
+              <li>Brigadeiro de chocolate</li>
+              <li>Brigadeiro de pistache</li>
+              <li>Brigadeiro branco</li>
+              <li>Brigadeiro de morango</li>
+              <li>Doce de leite</li>
+              <li>Geleia de limão</li>
+              <li>Geleia de frutas vermelhas</li>
+              <li>Cocada cremosa</li>
+              <li>Ganache ultracremosa</li>
+              <li>Merengue</li>
+              <li>Creme de baunilha</li>
+              <li>Docinhos de festa</li>
+            </ul>
+          </article>
+
+          <article class="recipes-card">
+            <div class="recipes-card__heading">
+              <div class="recipes-card__icon" aria-hidden="true"><i data-lucide="cake-slice"></i></div>
+              <h4 class="recipes-card__title">Bolos e tortas</h4>
+            </div>
+            <ul class="recipes-card__list">
+              <li>Bolo de baunilha</li>
+              <li>Bolo de chocolate</li>
+              <li>Bolo de cenoura</li>
+              <li>Bolo de laranja</li>
+              <li>Bolo de coco</li>
+              <li>Bolo de limão</li>
+              <li>Bolo red velvet</li>
+              <li>Bolo churros</li>
+              <li>Pão de mel</li>
+              <li>Cuca</li>
+              <li>Torta de limão</li>
+              <li>Torta de chocolate</li>
+              <li>Banoffee</li>
+              <li>Torta de maçã</li>
+              <li>Bolos babyfriendly — adoçados com frutas</li>
+            </ul>
+          </article>
+
+          <article class="recipes-card">
+            <div class="recipes-card__heading">
+              <div class="recipes-card__icon" aria-hidden="true"><i data-lucide="ice-cream-bowl"></i></div>
+              <h4 class="recipes-card__title">Outros doces e sobremesas</h4>
+            </div>
+            <ul class="recipes-card__list">
+              <li>Cookies</li>
+              <li>Crinkle cookie</li>
+              <li>Biscoitos amanteigados</li>
+              <li>Alfajores</li>
+              <li>Casadinhos</li>
+              <li>Brownie</li>
+              <li>Petit gateau</li>
+              <li>Trufas de cacau</li>
+              <li>Bombom de coco</li>
+              <li>Mousse</li>
+              <li>Pavê</li>
+              <li>Pudim de leite sem leite</li>
+              <li>Arroz doce vegano</li>
+              <li>Sorvete de doce de leite</li>
+              <li>Granola</li>
+            </ul>
+          </article>
+
+        </div>
+
+        <p class="section-recipes__more">E muitoooooo mais!</p>
 
       </div>
     </section>
@@ -1839,11 +2065,26 @@
       if (!oferta) return;
 
       function ofertaOffset() {
-        return window.matchMedia("(max-width: 767px)").matches ? 8 : 24;
+        return window.matchMedia("(max-width: 767px)").matches ? 12 : 24;
       }
 
       function scrollToOferta(behavior) {
-        var top = oferta.getBoundingClientRect().top + window.pageYOffset - ofertaOffset();
+        var margin = ofertaOffset();
+        var cardTop = oferta.getBoundingClientRect().top + window.pageYOffset;
+        var cardHeight = oferta.offsetHeight;
+        var viewportHeight = window.innerHeight;
+        var top;
+
+        if (cardHeight <= viewportHeight - margin * 2) {
+          top = cardTop - (viewportHeight - cardHeight) / 2;
+        } else {
+          var cta = oferta.querySelector(".section-offer__cta");
+          var cardBottom = cta
+            ? cta.getBoundingClientRect().bottom + window.pageYOffset
+            : cardTop + cardHeight;
+          top = cardBottom - viewportHeight + margin;
+        }
+
         window.scrollTo({ top: Math.max(0, top), behavior: behavior || "smooth" });
       }
 
