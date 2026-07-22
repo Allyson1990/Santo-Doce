@@ -72,6 +72,29 @@
     /* ============================================================
        HEADER (HERO) — Santo Doce
        ============================================================ */
+    .announcement {
+      background: var(--sd-primary-dark);
+      color: var(--sd-white);
+      text-align: center;
+      font-size: var(--sd-fs-body-sm);
+      font-weight: 500;
+      padding: 10px 24px;
+    }
+    .announcement__inner {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      line-height: 1.4;
+    }
+    .announcement__inner i,
+    .announcement__inner svg {
+      color: var(--sd-secondary);
+      width: 18px;
+      height: 18px;
+      flex: none;
+    }
+    .announcement strong { font-weight: 700; letter-spacing: 0.01em; }
+
     .header {
       position: relative;
       background: var(--sd-header-bg);
@@ -1350,6 +1373,14 @@
 
 <body>
 
+  <!-- ============ BARRA DE OFERTA ============ -->
+  <div class="announcement">
+    <span class="announcement__inner">
+      <i data-lucide="flame"></i>
+      <span><strong>OFERTA ESPECIAL:</strong> R$ 400,00 reais de desconto + 4 Bonus Exclusivos!</span>
+    </span>
+  </div>
+
   <!-- ============ HEADER / HERO ============ -->
   <header class="header">
     <div class="ds-container header__grid">
@@ -1787,12 +1818,13 @@
           </ul>
 
           <div class="section-offer__pricing" id="oferta-pricing">
-            <p class="section-offer__price">12 x de R$&nbsp;86,57</p>
-            <p class="section-offer__cash">ou R$ 837,00 à vista</p>
+            <p class="section-offer__investment">Investimento de <s>R$ 837,00</s></p>
+            <p class="section-offer__price">12 x de R$&nbsp;45,20</p>
+            <p class="section-offer__cash">ou R$ 437,00 à vista</p>
           </div>
 
           <div class="section-offer__cta">
-            <a href="https://pay.hotmart.com/I87819319C?off=5jn6esa8&checkoutMode=10&bid=1784726819130" class="sd-btn sd-btn--primary sd-btn--lg" target="_blank" rel="noopener noreferrer">
+            <a href="https://pay.hotmart.com/I87819319C?off=um97imv1&checkoutMode=10&bid=1783988161511" class="sd-btn sd-btn--primary sd-btn--lg" target="_blank" rel="noopener noreferrer">
               <i data-lucide="cake" class="sd-icon"></i>
               Quero entrar no Santo Doce
             </a>
